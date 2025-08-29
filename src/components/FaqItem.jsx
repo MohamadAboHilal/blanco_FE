@@ -3,7 +3,7 @@ import React from "react";
 export default function FaqItem({ q, a, isOpen, onToggle }) {
   return (
     <div
-      className={`collapse collapse-arrow transition-colors bg-base-200 ${
+      className={`collapse collapse-arrow transition-colors ${
         isOpen ? "!bg-[#E5F9FF] !border !border-[#10AFDE]" : ""
       }`}
     >

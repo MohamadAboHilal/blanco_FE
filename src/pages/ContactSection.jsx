@@ -24,7 +24,7 @@ export default function ContactSection() {
   return (
     <section className="px-4 sm:px-6 lg:px-8 my-16">
       <div className="mx-auto max-w-6xl">
-        <div className="rounded-3xl bg-base-100 shadow-xl ring-1 ring-base-200">
+        <div className="rounded-3xl bg-white">
           {/* Header */}
           <div className="text-center px-6 sm:px-10 pt-10">
             <h2 className="text-3xl sm:text-4xl font-bold">
@@ -57,14 +57,17 @@ export default function ContactSection() {
                 <input
                   type="text"
                   placeholder="Name"
-                  className="input w-full max-w-xs focus:border-transparent"
+                  className="input w-full max-w-xs"
+                  style={{ boxShadow: "0 0 10px rgba(0,0,0,0.08)" }}
+
                 />
                 <input
                   type="email"
                   name="email"
                   placeholder="Email"
                   required
-                  className="input w-full max-w-xs focus:border-transparent"
+                  className="input w-full max-w-xs"
+                  style={{ boxShadow: "0 0 10px rgba(0,0,0,0.08)" }}
                 />
               </div>
 
@@ -72,7 +75,9 @@ export default function ContactSection() {
                 name="message"
                 placeholder="Your Message"
                 required
-                className="textarea textarea-bordered bg-white rounded-2xl w-full mt-4 h-48 focus:border-transparent"
+                className="textarea bg-white rounded-xl w-full mt-4 h-48 resize-none"
+                style={{ boxShadow: "0 0 10px rgba(0,0,0,0.08)" }}
+
               />
 
               <div className="flex justify-end">

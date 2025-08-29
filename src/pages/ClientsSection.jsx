@@ -22,7 +22,7 @@ export default function ClientsSection() {
   ];
 
   return (
-    <section className="w-full py-12">
+    <section className="w-full py-12 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-[360px_minmax(0,1fr)] items-center gap-8">
           {/* Left — fixed content */}

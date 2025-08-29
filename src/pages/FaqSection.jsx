@@ -31,7 +31,7 @@ export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState(initialIndex);
 
   return (
-    <section className="relative overflow-hidden bg-base-100 mt-20">
+    <section className="relative overflow-hidden mt-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-start">
           {/* Left: FAQ Image */}

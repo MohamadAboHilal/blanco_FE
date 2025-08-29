@@ -23,7 +23,7 @@ function Header() {
     <div className="w-full sticky top-0 z-50 transition-colors duration-300">
       <div
         id="main-header"
-        className="navbar bg-[#EEF5FF] max-w-auto mx-auto px-8 transition-colors duration-300 rounded-[10px] mt-8"
+        className="navbar bg-[#EEF5FF] max-w-auto mx-auto px-8 transition-colors duration-300 rounded-[10px] mt-0"
       >
         <div className="flex-1">
           <a className=" normal-case text-xl">
@@ -57,7 +57,7 @@ function Header() {
                   />
                   AR
                 </summary>
-                <ul className="bg-base-100 rounded-t-none p-2">
+                <ul className="rounded-t-none p-2">
                   <li className="flex items-center">
                     <a className="text-xl font-semibold flex items-center gap-2">
                       <img

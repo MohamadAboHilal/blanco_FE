@@ -8,7 +8,7 @@ export default function ReviewCard({ avatar, name, role, text, rating }) {
         <div className="flex items-center gap-4">
           <img src={avatar} alt={name} className="w-14 h-14 rounded-full" />
           <div>
-            <h4 className="font-extrabold text-slate-900 text-lg">{name}</h4>
+            <h4 className="font-semibold text-slate-900 text-lg">{name}</h4>
             <p className="text-[#00B0DF] text-sm font-semibold">{role}</p>
           </div>
         </div>

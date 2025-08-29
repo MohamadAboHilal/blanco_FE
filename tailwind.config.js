@@ -8,5 +8,6 @@ export default {
     extend: {},
   },
   plugins: [require('daisyui'),],
+  darkMode: 'class', // prevents OS dark mode from applying styles
 }
 
