@@ -165,8 +165,28 @@ export default function ServicesSection() {
   ];
 
   return (
-    <section className="w-full">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-16">
+    <section className="relative w-full z-0 mt-20">
+      <div
+        aria-hidden="true"
+        className="
+      absolute left-1/2 -translate-x-1/2
+       top-[50px] md:top-[50px] 
+      w-[min(95vw,1200px)]              
+      aspect-[1209/492]                 
+      bg-no-repeat bg-contain bg-center
+      -z-10 pointer-events-none
+      bg-[url('/assets/servicesBg.svg')] 
+    "
+        style={{ backgroundImage: `url(${servicesBg})` }}
+      />
+
+      <div
+        aria-hidden="true"
+        className="absolute -left-32 top-36 w-[400px] h-[400px] -z-10 
+               bg-[#E5F9FF] rounded-full blur-[80px]"
+      />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-16">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
             ✨ Our <span className="text-[#00B0DF]">Cleaning</span> Services
@@ -179,8 +199,7 @@ export default function ServicesSection() {
           </p>
         </div>
 
-        {/* DaisyUI carousel instead of custom logic */}
-        <div className="mt-12">
+        <div className="mt-8 bg-slate-50">
           <ServicesCarousel services={services} />
         </div>
       </div>

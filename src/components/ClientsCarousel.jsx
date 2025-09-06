@@ -1,60 +1,44 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 export default function ClientsCarousel({ logos = [] }) {
-  const ref = useRef(null);
-  const [canLeft, setCanLeft] = useState(false);
-  const [canRight, setCanRight] = useState(false);
-
-  const updateArrows = useCallback(() => {
-    const el = ref.current;
-    if (!el) return;
-    setCanLeft(el.scrollLeft > 0);
-    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
-  }, []);
+  const autoplay = useRef(Autoplay({ delay: 2500, stopOnInteraction: true }));
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, align: "start", dragFree: true },
+    [autoplay.current]
+  );
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const onWheel = (e) => {
-      if (Math.abs(e.deltaY) === 0) return;
-      // convert vertical wheel to horizontal
-      e.preventDefault();
-      el.scrollBy({ left: e.deltaY * 6, behavior: "smooth" });
-    };
-
-    el.addEventListener("wheel", onWheel, { passive: false });
-    el.addEventListener("scroll", updateArrows, { passive: true });
-    window.addEventListener("resize", updateArrows);
-    updateArrows();
-
+    if (!emblaApi) return;
+    const node = emblaRef.current;
+    const plugin = autoplay.current;
+    const onEnter = () => plugin.stop();
+    const onLeave = () => plugin.play();
+    node?.addEventListener("mouseenter", onEnter);
+    node?.addEventListener("mouseleave", onLeave);
     return () => {
-      el.removeEventListener("wheel", onWheel);
-      el.removeEventListener("scroll", updateArrows);
-      window.removeEventListener("resize", updateArrows);
+      node?.removeEventListener("mouseenter", onEnter);
+      node?.removeEventListener("mouseleave", onLeave);
     };
-  }, [updateArrows]);
-
-  const page = (dir) => {
-    const el = ref.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * el.clientWidth, behavior: "smooth" });
-  };
+  }, [emblaApi, emblaRef]);
 
   return (
-    <div className="relative">
-      {/* scroll area */}
-      <div
-        ref={ref}
-        className="carousel w-full overflow-x-auto overflow-y-hidden scroll-smooth no-scrollbar px-12"
-      >
-        <div className="carousel-item flex gap-16">
+    <div className="relative px-6 md:px-12">
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex gap-6">
           {logos.map((src, i) => (
-            <div key={i} className="flex-none">
+            <div
+              key={i}
+              className="
+                flex-none flex items-center justify-center
+                basis-1/2 xs:basis-1/3 sm:basis-1/5 lg:basis-1/6
+              "
+            >
               <img
                 src={src}
                 alt={`client-${i}`}
-                className="h-10 md:h-12 w-auto object-contain"
+                className="h-10 md:h-12 w-auto object-contain select-none"
                 draggable="false"
               />
             </div>

@@ -9,14 +9,16 @@ import ClientsSection from "./pages/ClientsSection.jsx";
 import TipsSection from "./pages/TipsSection.jsx";
 import FaqSection from "./pages/FaqSection.jsx";
 import ContactSection from "./pages/ContactSection.jsx";
+import WorkGallerySection from "./pages/WorkGallerySection.jsx";
 
 function App() {
   return (
     <>
-      <div className="">
+      <div>
         <Header />
         <Home />
         <ServicesSection />
+        <WorkGallerySection />
         <ReviewsSection />
         <ClientsSection />
         <TipsSection />

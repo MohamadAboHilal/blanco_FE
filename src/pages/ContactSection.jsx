@@ -31,7 +31,7 @@ export default function ContactSection() {
               <span>✨ Get In</span>{" "}
               <span className="text-[#00AFDF]">Touch</span>
             </h2>
-            <p className="mt-4 max-w-3xl mx-auto text-base-content/70 text-xl font-semibold">
+            <p className="mt-4 max-w-3xl mx-auto text-base-content/70 text-xl font-semibold text-[#061B2D]">
               Ready to experience professional cleaning services? Contact us
               today for a free consultation and a customized cleaning plan for
               your business.
@@ -59,7 +59,6 @@ export default function ContactSection() {
                   placeholder="Name"
                   className="input w-full max-w-xs"
                   style={{ boxShadow: "0 0 10px rgba(0,0,0,0.08)" }}
-
                 />
                 <input
                   type="email"
@@ -77,7 +76,6 @@ export default function ContactSection() {
                 required
                 className="textarea bg-white rounded-xl w-full mt-4 h-48 resize-none"
                 style={{ boxShadow: "0 0 10px rgba(0,0,0,0.08)" }}
-
               />
 
               <div className="flex justify-end">

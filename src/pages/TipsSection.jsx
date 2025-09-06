@@ -7,6 +7,7 @@ import iconClock from "../assets/clock.svg";
 import iconDrop from "../assets/drop.svg";
 import iconShield from "../assets/shield.svg";
 import iconBulb from "../assets/bulb.svg";
+import starsBG from "../assets/starsBG.svg";
 
 export default function TipsSection() {
   const tips = [
@@ -123,7 +124,14 @@ export default function TipsSection() {
   ];
 
   return (
-    <section className="w-full bg-[#FBF4ED] py-14">
+    <section
+      className="w-full bg-[#FBF4ED] pt-14 pb-36 bg-repeat-x bg-bottom bg-contain"
+      style={{
+        backgroundImage: `url(${starsBG})`,
+        backgroundPosition: "center bottom",
+        backgroundSize: "min(1200px, 95vw) auto",
+      }}
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         {/* Heading */}
         <div className="text-center mb-10">

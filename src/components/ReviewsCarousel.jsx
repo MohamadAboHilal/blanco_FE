@@ -1,80 +1,86 @@
-import React, { useRef, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import ReviewCard from "./ReviewCard";
 
 function chunkArray(array, size) {
-  const result = [];
-  for (let i = 0; i < array.length; i += size) {
-    result.push(array.slice(i, i + size));
-  }
-  return result;
+  const out = [];
+  for (let i = 0; i < array.length; i += size)
+    out.push(array.slice(i, i + size));
+  return out;
 }
 
 export default function ReviewsCarousel({ reviews = [] }) {
-  const carouselRef = useRef(null);
-
-  // Split reviews into pages of 4 (2x2)
+  // 4 reviews per page -> 2 columns × 2 rows
   const pages = chunkArray(reviews, 4);
 
+  // Embla (no autoplay)
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(false);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setCanPrev(emblaApi.canScrollPrev());
+    setCanNext(emblaApi.canScrollNext());
+  }, [emblaApi]);
+
   useEffect(() => {
-    const el = carouselRef.current;
-    if (!el) return;
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+  }, [emblaApi, onSelect]);
 
-    const onWheel = (e) => {
-      if (e.deltaY === 0) return;
-      e.preventDefault();
-      el.scrollTo({
-        left: el.scrollLeft + e.deltaY * 6,
-        behavior: "smooth",
-      });
-    };
-
-    const onMouseEnter = () => {
-      el.focus();
-    };
-
-    el.addEventListener("wheel", onWheel, { passive: false });
-    el.addEventListener("mouseenter", onMouseEnter);
-
-    return () => {
-      el.removeEventListener("wheel", onWheel);
-      el.removeEventListener("mouseenter", onMouseEnter);
-    };
-  }, []);
-
-  // Each page is 2 columns wide, so scroll by the width of one page
-  const scrollByPage = () => {
-    const el = carouselRef.current;
-    if (el) {
-      const pageWidth = el.offsetWidth;
-      return pageWidth;
-    }
-    return 1000;
-  };
+  const prev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const next = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
   return (
-    <>
-      <div
-        ref={carouselRef}
-        tabIndex={0}
-        className="carousel w-full overflow-x-auto scroll-smooth focus:outline-none"
-        style={{ outline: "none", height: "480px" }}
+    <div className="relative w-full px-6 md:px-12">
+      {/* arrows */}
+      <button
+        type="button"
+        onClick={prev}
+        disabled={!canPrev}
+        className="absolute left-2 top-1/2 -translate-y-1/2 z-20 px-3 py-1 rounded-xl shadow disabled:opacity-40"
+        aria-label="Previous reviews"
       >
-        <div className="flex" style={{ minWidth: "100%" }}>
+        ‹
+      </button>
+      <button
+        type="button"
+        onClick={next}
+        disabled={!canNext}
+        className="absolute right-2 top-1/2 -translate-y-1/2 z-20 px-3 py-1 rounded-xl shadow disabled:opacity-40"
+        aria-label="Next reviews"
+      >
+        ›
+      </button>
+
+      {/* Viewport: keep Y visible so card shadows show */}
+      <div
+        className="overflow-x-hidden overflow-y-visible py-8 select-none"
+        ref={emblaRef}
+      >
+        {/* Track: margin-based spacing (Embla-friendly) */}
+        <div className="flex -ml-6 pb-2">
           {pages.map((page, pageIdx) => (
             <div
               key={pageIdx}
-              className="flex-none px-3"
-              style={{ width: "100%" }}
+              className="pl-6 flex-[0_0_100%] shrink-0" /* one full page per slide */
             >
-              <div className="grid grid-cols-2 grid-rows-2 gap-6 h-full">
-                {page.map((review, idx) => (
-                  <ReviewCard key={idx} {...review} />
+              {/* 2x2 grid page; rows fixed to card height */}
+              <div className="grid grid-cols-2 gap-y-4 auto-rows-[198px]">
+                {page.map((review, i) => (
+                  <div key={i} className="flex items-stretch justify-center">
+                    {/* The card is 422×198 max, centered inside each grid cell */}
+                    <ReviewCard {...review} />
+                  </div>
                 ))}
               </div>
             </div>
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }

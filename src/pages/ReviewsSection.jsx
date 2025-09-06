@@ -1,5 +1,6 @@
 import React from "react";
 import ReviewsCarousel from "../components/ReviewsCarousel";
+import bigStarsBG from "../assets/bigStarsBG.svg";
 
 export default function ReviewsSection() {
   const reviews = [
@@ -77,8 +78,24 @@ export default function ReviewsSection() {
   ];
 
   return (
-    <section className="w-full py-16 bg-[#F9FBFF]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+    <section className="relative w-full py-16 bg-[#F9FBFF] overflow-hidden">
+      <img
+        src={bigStarsBG}
+        alt=""
+        className="pointer-events-none select-none
+                 absolute top-1/2 right-0 -translate-y-1/2
+                 w-[300px] h-auto
+                 z-20 opacity-90"
+      />
+
+      <div
+        aria-hidden="true"
+        className="absolute -left-24 -top-10 w-[420px] h-[420px]
+                 z-0 bg-[#00B0DF]/15 rounded-full blur-[150px]"
+      />
+
+      {/* Content */}
+      <div className="relative z-30 max-w-7xl mx-auto px-6 lg:px-10">
         <div className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
             ✨ What Our <span className="text-[#00B0DF]">Clients</span> Say
