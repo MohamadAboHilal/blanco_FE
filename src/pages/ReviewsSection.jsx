@@ -2,7 +2,13 @@ import React from "react";
 import ReviewsCarousel from "../components/ReviewsCarousel";
 import bigStarsBG from "../assets/bigStarsBG.svg";
 
+import { useTranslation, Trans } from "react-i18next";
+import { useLocale } from "../useLocale";
+
 export default function ReviewsSection() {
+  const { t } = useTranslation();
+  const { dir } = useLocale();
+
   const reviews = [
     {
       avatar: "https://cdn-icons-png.flaticon.com/512/6596/6596121.png",
@@ -78,7 +84,10 @@ export default function ReviewsSection() {
   ];
 
   return (
-    <section className="relative w-full py-16 bg-[#F9FBFF] overflow-hidden">
+    <section
+      id="reviews"
+      className="relative w-full py-16 bg-[#F9FBFF] overflow-hidden"
+    >
       <img
         src={bigStarsBG}
         alt=""
@@ -98,10 +107,12 @@ export default function ReviewsSection() {
       <div className="relative z-30 max-w-7xl mx-auto px-6 lg:px-10">
         <div className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
-            ✨ What Our <span className="text-[#00B0DF]">Clients</span> Say
+            ✨ {t("reviews.whatOur")}{" "}
+            <span className="text-[#00B0DF]">{t("reviews.clients")}</span>{" "}
+            {t("reviews.say")}
           </h2>
           <p className="mt-4 text-gray-600 font-semibold text-xl">
-            Don’t just take our word for it – hear from our satisfied customers
+            {t("reviews.description")}
           </p>
         </div>
 

@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import ContactPic from "../assets/contactus.png";
 
+import { useTranslation, Trans } from "react-i18next";
+import { useLocale } from "../useLocale";
+
 export default function ContactSection() {
+  const { t } = useTranslation();
+  const locale = useLocale();
+
   const [status, setStatus] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -22,19 +28,17 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="px-4 sm:px-6 lg:px-8 my-16">
+    <section id="contact" className="px-4 sm:px-6 lg:px-8 my-16">
       <div className="mx-auto max-w-6xl">
         <div className="rounded-3xl bg-white">
           {/* Header */}
           <div className="text-center px-6 sm:px-10 pt-10">
             <h2 className="text-3xl sm:text-4xl font-bold">
-              <span>✨ Get In</span>{" "}
-              <span className="text-[#00AFDF]">Touch</span>
+              <span>✨ {t("contact.getIn")}</span>{" "}
+              <span className="text-[#00AFDF]">{t("contact.touch")}</span>
             </h2>
             <p className="mt-4 max-w-3xl mx-auto text-base-content/70 text-xl font-semibold text-[#061B2D]">
-              Ready to experience professional cleaning services? Contact us
-              today for a free consultation and a customized cleaning plan for
-              your business.
+              {t("contact.description")}
             </p>
           </div>
 
@@ -56,14 +60,14 @@ export default function ContactSection() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input
                   type="text"
-                  placeholder="Name"
+                  placeholder={t("contact.name")}
                   className="input w-full max-w-xs"
                   style={{ boxShadow: "0 0 10px rgba(0,0,0,0.08)" }}
                 />
                 <input
                   type="email"
                   name="email"
-                  placeholder="Email"
+                  placeholder={t("contact.email")}
                   required
                   className="input w-full max-w-xs"
                   style={{ boxShadow: "0 0 10px rgba(0,0,0,0.08)" }}
@@ -72,7 +76,7 @@ export default function ContactSection() {
 
               <textarea
                 name="message"
-                placeholder="Your Message"
+                placeholder={t("contact.message")}
                 required
                 className="textarea bg-white rounded-xl w-full mt-4 h-48 resize-none"
                 style={{ boxShadow: "0 0 10px rgba(0,0,0,0.08)" }}
@@ -83,13 +87,13 @@ export default function ContactSection() {
                   type="submit"
                   className="btn btn-lg rounded-2xl px-10 mt-4 text-white border-none bg-[#00AFDF] hover:bg-[#0096bf]"
                 >
-                  Send
+                  {t("contact.send")}
                 </button>
               </div>
 
               {status === "sent" && (
                 <div className="alert alert-success mt-4 rounded-2xl">
-                  <span>Thanks! Your message has been sent.</span>
+                  <span>{t("contact.alert")}</span>
                 </div>
               )}
             </form>

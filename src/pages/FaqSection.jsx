@@ -2,7 +2,13 @@ import React, { useMemo, useState } from "react";
 import FaqItem from "../components/FaqItem";
 import faqSymbol from "../assets/faqSymbol.svg";
 
+import { useTranslation, Trans } from "react-i18next";
+import { useLocale } from "../useLocale";
+
 export default function FaqSection() {
+  const { t } = useTranslation();
+  const locale = useLocale();
+
   const faqs = [
     {
       q: "What Cleaning Product Do We Use ?",
@@ -97,7 +103,7 @@ export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState(initialIndex);
 
   return (
-    <section className="relative isolate overflow-hidden mt-20">
+    <section id="faq" className="relative isolate overflow-hidden mt-20">
       {/* Decorative symbol */}
       <img
         src={faqSymbol} // import faqSymbol from "../assets/faqSymbol.svg";
@@ -118,12 +124,11 @@ export default function FaqSection() {
             <div className="flex items-start gap-3">
               <div>
                 <h2 className="text-4xl md:text-4xl font-semibold leading-tight text-slate-900">
-                  <span>✨Frequently Asked </span>
-                  <span className="text-[#00B0DF]">Questions</span>
+                  <span>✨{t("faq.frequentlyAsked")} </span>
+                  <span className="text-[#00B0DF]">{t("faq.questions")}</span>
                 </h2>
                 <p className="mt-4 text-[#061B2D] text-xl md:text-lg font-bold">
-                  Find Answers To Common Questions About <br /> Our Cleaning
-                  Services.
+                  {t("faq.p1")} <br /> {t("faq.p2")}
                 </p>
               </div>
             </div>

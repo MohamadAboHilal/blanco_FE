@@ -64,7 +64,7 @@ export default function WorkGallerySection() {
   }, [modal]);
 
   return (
-    <section className="relative w-full py-16 bg-[#F9FBFF]">
+    <section id="gallery" className="relative w-full py-16 bg-[#F9FBFF]">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center mb-8">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900">

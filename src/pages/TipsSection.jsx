@@ -9,7 +9,13 @@ import iconShield from "../assets/shield.svg";
 import iconBulb from "../assets/bulb.svg";
 import starsBG from "../assets/starsBG.svg";
 
+import { useTranslation, Trans } from "react-i18next";
+import { useLocale } from "../useLocale";
+
 export default function TipsSection() {
+  const { t } = useTranslation();
+  const { dir } = useLocale();
+
   const tips = [
     {
       icon: iconLeaf,
@@ -125,6 +131,7 @@ export default function TipsSection() {
 
   return (
     <section
+      id="tips"
       className="w-full bg-[#FBF4ED] pt-14 pb-36 bg-repeat-x bg-bottom bg-contain"
       style={{
         backgroundImage: `url(${starsBG})`,
@@ -136,11 +143,12 @@ export default function TipsSection() {
         {/* Heading */}
         <div className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
-            ✨ Professional <span className="text-[#00B0DF]">Cleaning</span>{" "}
-            Tips
+            ✨ {t("tips.professional")}{" "}
+            <span className="text-[#00B0DF]">{t("tips.cleaning")}</span>{" "}
+            {t("tips.tips")}
           </h2>
           <p className="mt-3 text-slate-700 text-2xl font-semibold pt-6">
-            Expert advice from our professional cleaning team
+            {t("tips.description")}
           </p>
         </div>
 

@@ -1,33 +1,45 @@
 import React from "react";
-import "./components/Header.jsx";
+import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
+
+// Home page = your current stack of sections
 import Home from "./pages/Home.jsx";
 import ServicesSection from "./pages/ServiceSection.jsx";
+import WorkGallerySection from "./pages/WorkGallerySection.jsx";
 import ReviewsSection from "./pages/ReviewsSection.jsx";
-import Footer from "./components/Footer.jsx";
 import ClientsSection from "./pages/ClientsSection.jsx";
 import TipsSection from "./pages/TipsSection.jsx";
 import FaqSection from "./pages/FaqSection.jsx";
 import ContactSection from "./pages/ContactSection.jsx";
-import WorkGallerySection from "./pages/WorkGallerySection.jsx";
 
-function App() {
+// About page (new) – renders your WhoWeAreSection
+import AboutPage from "./pages/AboutPage.jsx";
+
+function HomePage() {
   return (
     <>
-      <div>
-        <Header />
-        <Home />
-        <ServicesSection />
-        <WorkGallerySection />
-        <ReviewsSection />
-        <ClientsSection />
-        <TipsSection />
-        <FaqSection />
-        <ContactSection />
-        <Footer />
-      </div>
+      <Home />
+      <ServicesSection />
+      <WorkGallerySection />
+      <ReviewsSection />
+      <ClientsSection />
+      <TipsSection />
+      <FaqSection />
+      <ContactSection />
     </>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+      </Routes>
+      <Footer />
+    </>
+  );
+}

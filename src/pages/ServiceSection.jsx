@@ -1,9 +1,16 @@
 import React from "react";
 import ServiceCard from "../components/ServiceCard";
+
 import ServicesCarousel from "../components/ServicesCarousel";
 import servicesBg from "../assets/servicesBg.svg";
 
+import { useTranslation, Trans } from "react-i18next";
+import { useLocale } from "../useLocale";
+
 export default function ServicesSection() {
+  const { t } = useTranslation();
+  const { dir } = useLocale();
+
   // Add/edit items here – the UI updates automatically.
   const services = [
     {
@@ -165,7 +172,7 @@ export default function ServicesSection() {
   ];
 
   return (
-    <section className="relative w-full z-0 mt-20">
+    <section id="services" className="relative w-full z-0 mt-20">
       <div
         aria-hidden="true"
         className="
@@ -189,13 +196,12 @@ export default function ServicesSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-16">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
-            ✨ Our <span className="text-[#00B0DF]">Cleaning</span> Services
+            ✨ {t("services.our")}{" "}
+            <span className="text-[#00B0DF]">{t("services.cleaning")}</span>{" "}
+            {t("services.service")}
           </h2>
           <p className="mt-5 text-slate-600 leading-relaxed text-xl font-semibold">
-            ✨ Blanco offers a range of service packages to suit different needs
-            and environments. Whether you require basic maintenance or
-            specialized cleaning, we have the right solution for your business
-            ✨.
+            ✨ {t("services.description")} ✨.
           </p>
         </div>
 
