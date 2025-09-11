@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ServiceCard({
   badgeText,
-  badgeClass = "bg-blue-100 text-blue-700",
+  badgeClass,
   title,
   description,
   features = [],
@@ -21,7 +21,11 @@ export default function ServiceCard({
       <div>
         {badgeText && (
           <span
-            className={`inline-block text-sm font-semibold px-3 py-1 rounded-md ${badgeClass}`}
+            className={`inline-block text-sm font-semibold px-3 py-1 rounded-md ${
+              badgeClass && badgeClass.trim()
+                ? badgeClass
+                : "bg-blue-100 text-blue-700"
+            }`}
           >
             {badgeText}
           </span>

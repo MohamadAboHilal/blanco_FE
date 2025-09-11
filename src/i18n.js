@@ -93,6 +93,19 @@ const resources = {
         retail: "Retail Stores & Restaurants",
         government: "Governmental Buildings",
       },
+      work: {
+        our: "Our",
+        work: "Work",
+        gallery: "Gallery",
+        description:
+          "See The Transformation - Before And After Photos & Videos",
+        all: "All Work",
+        beforeAfter: "Before & After",
+        video: "Video",
+        before: "Before",
+        after: "After",
+      },
+
       footer: {
         make: "Make It Sparkle",
         cleaning: "Cleaning Services Company",
@@ -192,6 +205,17 @@ const resources = {
         healthcare: "المراكز الصحية",
         retail: "المتاجر والمطاعم",
         government: "المباني الحكومية",
+      },
+      work: {
+        our: "معرض",
+        work: "أعمال",
+        gallery: "فريقنا",
+        description: "شاهد الفرق — صور ومقاطع قبل وبعد",
+        all: "جميع الاعمال",
+        beforeAfter: "قبل وبعد",
+        video: "فيديو",
+        before: "قبل",
+        after: "بعد",
       },
 
       footer: {

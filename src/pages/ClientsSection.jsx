@@ -1,31 +1,19 @@
-import React from "react";
+import React, { useMemo } from "react";
 import ClientsCarousel from "../components/ClientsCarousel";
-// import your logo svgs/pngs
-import adidas from "../assets/adidas.jpg";
-import airbnb from "../assets/airbnb.jpg";
-import tesla from "../assets/tesla.jpg";
-
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useLocale } from "../useLocale";
+import { useHomeData } from "../contexts/HomeDataContext";
 
 export default function ClientsSection() {
   const { t } = useTranslation();
   const { dir } = useLocale();
+  const { clients: apiClients, loading, error } = useHomeData();
 
-  const logos = [
-    adidas,
-    airbnb,
-    tesla,
-    adidas,
-    airbnb,
-    tesla,
-    adidas,
-    airbnb,
-    tesla,
-    adidas,
-    airbnb,
-    tesla,
-  ];
+  // Map API -> carousel prop (array of image URLs)
+  const logos = useMemo(
+    () => (apiClients ?? []).map((c) => c.image),
+    [apiClients]
+  );
 
   return (
     <section id="clients" className="w-full py-12 bg-white">
@@ -42,8 +30,22 @@ export default function ClientsSection() {
             </p>
           </div>
 
-          {/* Right — only logos scroll */}
-          <ClientsCarousel logos={logos} />
+          {/* Right — logos carousel */}
+          {loading ? (
+            <div className="h-[140px] grid place-items-center text-slate-400">
+              {t("common.loading") || "Loading…"}
+            </div>
+          ) : error ? (
+            <div className="p-6 text-center text-red-600">
+              {t("common.failed") || "Failed to load clients."}
+            </div>
+          ) : logos.length === 0 ? (
+            <div className="p-6 text-center text-slate-500">
+              {t("clients.none") || "No clients to show."}
+            </div>
+          ) : (
+            <ClientsCarousel logos={logos} />
+          )}
         </div>
       </div>
     </section>

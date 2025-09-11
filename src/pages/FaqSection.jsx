@@ -1,120 +1,41 @@
-import React, { useMemo, useState } from "react";
+// FaqSection.jsx
+import React, { useEffect, useMemo, useState } from "react";
 import FaqItem from "../components/FaqItem";
 import faqSymbol from "../assets/faqSymbol.svg";
-
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useLocale } from "../useLocale";
+import { useHomeData } from "../contexts/HomeDataContext";
 
 export default function FaqSection() {
   const { t } = useTranslation();
   const locale = useLocale();
+  const { faqs: apiFaqs, loading, error } = useHomeData();
 
-  const faqs = [
-    {
-      q: "What Cleaning Product Do We Use ?",
-      a: "We use eco-friendly, non-toxic cleaning products that are safe for your family and pets...",
-      open: true,
-    },
-    {
-      q: "Do you bring your own supplies?",
-      a: "We bring all supplies, but we can use yours if you prefer.",
-    },
-    {
-      q: "Do you offer green cleaning?",
-      a: "Yes, we offer green cleaning upon request at no extra cost.",
-    },
-    {
-      q: "Can I request a specific product?",
-      a: "Absolutely. Let us know your preferred brand or fragrance.",
-    },
-    {
-      q: "How often should I schedule cleaning?",
-      a: "We recommend weekly or bi-weekly service for most households.",
-    },
-    {
-      q: "What Cleaning Product Do We Use ?",
-      a: "We use eco-friendly, non-toxic cleaning products that are safe for your family and pets...",
-      open: true,
-    },
-    {
-      q: "Do you bring your own supplies?",
-      a: "We bring all supplies, but we can use yours if you prefer.",
-    },
-    {
-      q: "Do you offer green cleaning?",
-      a: "Yes, we offer green cleaning upon request at no extra cost.",
-    },
-    {
-      q: "Can I request a specific product?",
-      a: "Absolutely. Let us know your preferred brand or fragrance.",
-    },
-    {
-      q: "How often should I schedule cleaning?",
-      a: "We recommend weekly or bi-weekly service for most households.",
-    },
-    {
-      q: "What Cleaning Product Do We Use ?",
-      a: "We use eco-friendly, non-toxic cleaning products that are safe for your family and pets...",
-      open: true,
-    },
-    {
-      q: "Do you bring your own supplies?",
-      a: "We bring all supplies, but we can use yours if you prefer.",
-    },
-    {
-      q: "Do you offer green cleaning?",
-      a: "Yes, we offer green cleaning upon request at no extra cost.",
-    },
-    {
-      q: "Can I request a specific product?",
-      a: "Absolutely. Let us know your preferred brand or fragrance.",
-    },
-    {
-      q: "How often should I schedule cleaning?",
-      a: "We recommend weekly or bi-weekly service for most households.",
-    },
-    {
-      q: "What Cleaning Product Do We Use ?",
-      a: "We use eco-friendly, non-toxic cleaning products that are safe for your family and pets...",
-      open: true,
-    },
-    {
-      q: "Do you bring your own supplies?",
-      a: "We bring all supplies, but we can use yours if you prefer.",
-    },
-    {
-      q: "Do you offer green cleaning?",
-      a: "Yes, we offer green cleaning upon request at no extra cost.",
-    },
-    {
-      q: "Can I request a specific product?",
-      a: "Absolutely. Let us know your preferred brand or fragrance.",
-    },
-    {
-      q: "How often should I schedule cleaning?",
-      a: "We recommend weekly or bi-weekly service for most households.",
-    },
-  ];
+  // Map API -> UI shape
+  const faqs = useMemo(
+    () =>
+      (apiFaqs ?? []).map((f) => ({
+        id: f.id,
+        q: f.question,
+        a: f.answer,
+      })),
+    [apiFaqs]
+  );
 
-  const initialIndex = useMemo(() => {
-    const i = faqs.findIndex((f) => f.open);
-    return i >= 0 ? i : 0;
-  }, []);
-  const [openIndex, setOpenIndex] = useState(initialIndex);
+  // Open the first item after data arrives (or none: set to -1)
+  const [openIndex, setOpenIndex] = useState(-1);
+  useEffect(() => {
+    if (faqs.length) setOpenIndex(0);
+  }, [faqs.length]);
 
   return (
     <section id="faq" className="relative isolate overflow-hidden mt-20">
       {/* Decorative symbol */}
       <img
-        src={faqSymbol} // import faqSymbol from "../assets/faqSymbol.svg";
+        src={faqSymbol}
         alt=""
         aria-hidden="true"
-        className="
-        pointer-events-none select-none
-        absolute left-[45rem] bottom-[2rem]
-        w-[120px] md:w-[160px] lg:w-[200px] h-auto
-        z-0 opacity-90
-      "
+        className="pointer-events-none select-none absolute left-[45rem] bottom-[2rem] w-[120px] md:w-[160px] lg:w-[200px] h-auto z-0 opacity-90"
       />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -136,15 +57,29 @@ export default function FaqSection() {
 
           {/* Right: Scrollable FAQ list */}
           <div className="w-full min-h-[450px] max-h-[520px] overflow-y-auto pr-2 space-y-4">
-            {faqs.map((item, i) => (
-              <FaqItem
-                key={i}
-                q={item.q}
-                a={item.a}
-                isOpen={openIndex === i}
-                onToggle={() => setOpenIndex(i)}
-              />
-            ))}
+            {loading ? (
+              <div className="py-8 text-center text-slate-400">
+                {t("common.loading") || "Loading…"}
+              </div>
+            ) : error ? (
+              <div className="py-8 text-center text-red-600">
+                {t("common.failed") || "Failed to load FAQs."}
+              </div>
+            ) : faqs.length === 0 ? (
+              <div className="py-8 text-center text-slate-500">
+                {t("faq.none") || "No FAQs available."}
+              </div>
+            ) : (
+              faqs.map((item, i) => (
+                <FaqItem
+                  key={item.id ?? i}
+                  q={item.q}
+                  a={item.a}
+                  isOpen={openIndex === i}
+                  onToggle={() => setOpenIndex(i)}
+                />
+              ))
+            )}
           </div>
         </div>
       </div>

@@ -1,13 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
   },
-  plugins: [require('daisyui'),],
-  darkMode: 'class', // prevents OS dark mode from applying styles
-}
-
+  safelist: [{ pattern: /(bg|text)-(cyan|orange|emerald|purple)-(100|700)/ }],
+  plugins: [require("daisyui")],
+  darkMode: "class",
+};

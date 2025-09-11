@@ -1,109 +1,46 @@
-import React from "react";
+// ReviewsSection.jsx
+import React, { useMemo } from "react";
 import ReviewsCarousel from "../components/ReviewsCarousel";
 import bigStarsBG from "../assets/bigStarsBG.svg";
-
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useLocale } from "../useLocale";
+import { useHomeData } from "../contexts/HomeDataContext";
 
 export default function ReviewsSection() {
   const { t } = useTranslation();
   const { dir } = useLocale();
+  const { testimonials: apiTestimonials, loading, error } = useHomeData();
 
-  const reviews = [
-    {
-      avatar: "https://cdn-icons-png.flaticon.com/512/6596/6596121.png",
-      name: "Jennifer Wilson",
-      role: "Homeowner",
-      rating: 5,
-      text: "Blanco transformed my home! Their attention to detail is incredible and the staff is so professional. I wouldn't trust anyone else with my cleaning needs.",
-    },
-    {
-      avatar: "https://cdn-icons-png.flaticon.com/512/6596/6596121.png",
-      name: "David Miller",
-      role: "Homeowner",
-      rating: 5,
-      text: "Excellent experience! The cleaners were punctual, polite, and left everything spotless.",
-    },
-    {
-      avatar: "https://cdn-icons-png.flaticon.com/512/6596/6596121.png",
-      name: "Sophia Lee",
-      role: "Homeowner",
-      rating: 5,
-      text: "Professional and efficient. Highly recommend Blanco for regular maintenance cleaning.",
-    },
-    {
-      avatar: "https://cdn-icons-png.flaticon.com/512/6596/6596121.png",
-      name: "Michael Johnson",
-      role: "Homeowner",
-      rating: 5,
-      text: "Super reliable! Always a pleasure working with this team.",
-    },
-    {
-      avatar: "https://cdn-icons-png.flaticon.com/512/6596/6596121.png",
-      name: "Michael Johnson",
-      role: "Homeowner",
-      rating: 5,
-      text: "Super reliable! Always a pleasure working with this team.",
-    },
-    {
-      avatar: "https://cdn-icons-png.flaticon.com/512/6596/6596121.png",
-      name: "Michael Johnson",
-      role: "Homeowner",
-      rating: 5,
-      text: "Super reliable! Always a pleasure working with this team.",
-    },
-    {
-      avatar: "https://cdn-icons-png.flaticon.com/512/6596/6596121.png",
-      name: "Michael Johnson",
-      role: "Homeowner",
-      rating: 5,
-      text: "Super reliable! Always a pleasure working with this team.",
-    },
-    {
-      avatar: "https://cdn-icons-png.flaticon.com/512/6596/6596121.png",
-      name: "Michael Johnson",
-      role: "Homeowner",
-      rating: 5,
-      text: "Super reliable! Always a pleasure working with this team.",
-    },
-    {
-      avatar: "https://cdn-icons-png.flaticon.com/512/6596/6596121.png",
-      name: "Michael Johnson",
-      role: "Homeowner",
-      rating: 5,
-      text: "Super reliable! Always a pleasure working with this team.",
-    },
-    {
-      avatar: "https://cdn-icons-png.flaticon.com/512/6596/6596121.png",
-      name: "Michael Johnson",
-      role: "Homeowner",
-      rating: 5,
-      text: "Super reliable! Always a pleasure working with this team.",
-    },
-    // add more...
-  ];
+  // Map API -> UI
+  const reviews = useMemo(
+    () =>
+      (apiTestimonials ?? []).map((r) => ({
+        id: r.id,
+        avatar: r.client_image,
+        name: r.client_name,
+        role: r.client_position,
+        rating: r.rate,
+        text: r.text,
+      })),
+    [apiTestimonials]
+  );
 
   return (
     <section
       id="reviews"
-      className="relative w-full py-16 bg-[#F9FBFF] overflow-hidden"
+      className="relative w-full py-16 bg-[#F9FBFF] overflow-hidden overflow-x-hidden"
     >
       <img
         src={bigStarsBG}
         alt=""
-        className="pointer-events-none select-none
-                 absolute top-1/2 right-0 -translate-y-1/2
-                 w-[300px] h-auto
-                 z-20 opacity-90"
+        className="pointer-events-none select-none absolute top-1/2 right-0 -translate-y-1/2 w-[300px] h-auto z-20 opacity-90"
       />
 
       <div
         aria-hidden="true"
-        className="absolute -left-24 -top-10 w-[420px] h-[420px]
-                 z-0 bg-[#00B0DF]/15 rounded-full blur-[150px]"
+        className="absolute -left-24 -top-10 w-[420px] h-[420px] z-0 bg-[#00B0DF]/15 rounded-full blur-[150px]"
       />
 
-      {/* Content */}
       <div className="relative z-30 max-w-7xl mx-auto px-6 lg:px-10">
         <div className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
@@ -116,7 +53,21 @@ export default function ReviewsSection() {
           </p>
         </div>
 
-        <ReviewsCarousel reviews={reviews} />
+        {loading ? (
+          <div className="h-[220px] grid place-items-center text-slate-400">
+            {t("common.loading") || "Loading…"}
+          </div>
+        ) : error ? (
+          <div className="p-6 text-center text-red-600">
+            {t("common.failed") || "Failed to load reviews."}
+          </div>
+        ) : reviews.length === 0 ? (
+          <div className="p-6 text-center text-slate-500">
+            {t("reviews.none") || "No reviews available."}
+          </div>
+        ) : (
+          <ReviewsCarousel reviews={reviews} />
+        )}
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import ServiceCard from "../components/ServiceCard";
 
 import ServicesCarousel from "../components/ServicesCarousel";
@@ -7,172 +7,32 @@ import servicesBg from "../assets/servicesBg.svg";
 import { useTranslation, Trans } from "react-i18next";
 import { useLocale } from "../useLocale";
 
+import { useHomeData } from "../contexts/HomeDataContext";
+
 export default function ServicesSection() {
   const { t } = useTranslation();
   const { dir } = useLocale();
 
-  // Add/edit items here – the UI updates automatically.
-  const services = [
-    {
-      badgeText: "Popular",
-      badgeClass: "bg-cyan-100 text-cyan-700",
-      title: "Basic Package",
-      description:
-        "Ideal for offices, retail spaces, and institutions that need regular, day-to-day cleaning.",
-      features: [
-        "Dusting",
-        "Floor Cleaning",
-        "Trash Collection",
-        "Toilet Cleaning",
-      ],
-    },
-    {
-      badgeText: "Recommended",
-      badgeClass: "bg-amber-100 text-amber-700",
-      title: "Standard Package",
-      description:
-        "Designed for businesses that require deeper, more detailed cleaning on a regular basis.",
-      features: [
-        "Everything in Basic",
-        "Deep Cleaning",
-        "Glass & Window Cleaning",
-        "Sanitizing Services",
-      ],
-    },
-    {
-      badgeText: "Premium",
-      badgeClass: "bg-emerald-100 text-emerald-700",
-      title: "Premium Package",
-      description:
-        "Perfect for facilities that need specialized care and advanced cleaning solutions.",
-      features: [
-        "Everything in Standard",
-        "Marble Polishing",
-        "Crystallization",
-        "Post-Construction Cleaning",
-      ],
-    },
-    {
-      badgeText: "Flexible",
-      badgeClass: "bg-violet-100 text-violet-700",
-      title: "Customized Plans",
-      description:
-        "Every business is different. We build the right plan for you. Contact us for a quote!",
-      features: [
-        "Tailored Solutions",
-        "Flexible Scheduling",
-        "Custom Service Mix",
-        "Budget-Friendly Options",
-      ],
-    },
-    {
-      badgeText: "Flexible",
-      badgeClass: "bg-violet-100 text-violet-700",
-      title: "Customized Plans",
-      description:
-        "Every business is different. We build the right plan for you. Contact us for a quote!",
-      features: [
-        "Tailored Solutions",
-        "Flexible Scheduling",
-        "Custom Service Mix",
-        "Budget-Friendly Options",
-      ],
-    },
-    {
-      badgeText: "Flexible",
-      badgeClass: "bg-violet-100 text-violet-700",
-      title: "Customized Plans",
-      description:
-        "Every business is different. We build the right plan for you. Contact us for a quote!",
-      features: [
-        "Tailored Solutions",
-        "Flexible Scheduling",
-        "Custom Service Mix",
-        "Budget-Friendly Options",
-      ],
-    },
-    {
-      badgeText: "Flexible",
-      badgeClass: "bg-violet-100 text-violet-700",
-      title: "Customized Plans",
-      description:
-        "Every business is different. We build the right plan for you. Contact us for a quote!",
-      features: [
-        "Tailored Solutions",
-        "Flexible Scheduling",
-        "Custom Service Mix",
-        "Budget-Friendly Options",
-      ],
-    },
-    {
-      badgeText: "Flexible",
-      badgeClass: "bg-violet-100 text-violet-700",
-      title: "Customized Plans",
-      description:
-        "Every business is different. We build the right plan for you. Contact us for a quote!",
-      features: [
-        "Tailored Solutions",
-        "Flexible Scheduling",
-        "Custom Service Mix",
-        "Budget-Friendly Options",
-      ],
-    },
-    {
-      badgeText: "Flexible",
-      badgeClass: "bg-violet-100 text-violet-700",
-      title: "Customized Plans",
-      description:
-        "Every business is different. We build the right plan for you. Contact us for a quote!",
-      features: [
-        "Tailored Solutions",
-        "Flexible Scheduling",
-        "Custom Service Mix",
-        "Budget-Friendly Options",
-      ],
-    },
-    {
-      badgeText: "Flexible",
-      badgeClass: "bg-violet-100 text-violet-700",
-      title: "Customized Plans",
-      description:
-        "Every business is different. We build the right plan for you. Contact us for a quote!",
-      features: [
-        "Tailored Solutions",
-        "Flexible Scheduling",
-        "Custom Service Mix",
-        "Budget-Friendly Options",
-      ],
-    },
-    {
-      badgeText: "Flexible",
-      badgeClass: "bg-violet-100 text-violet-700",
-      title: "Customized Plans",
-      description:
-        "Every business is different. We build the right plan for you. Contact us for a quote!",
-      features: [
-        "Tailored Solutions",
-        "Flexible Scheduling",
-        "Custom Service Mix",
-        "Budget-Friendly Options",
-      ],
-    },
-    {
-      badgeText: "Flexible",
-      badgeClass: "bg-violet-100 text-violet-700",
-      title: "Customized Plans",
-      description:
-        "Every business is different. We build the right plan for you. Contact us for a quote!",
-      features: [
-        "Tailored Solutions",
-        "Flexible Scheduling",
-        "Custom Service Mix",
-        "Budget-Friendly Options",
-      ],
-    },
-  ];
+  const { services: apiServices, loading, error } = useHomeData();
+
+  const services = useMemo(
+    () =>
+      (apiServices ?? []).map((s) => ({
+        id: s.id,
+        badgeText: s.badge_text,
+        badgeClass: s.badge_color,
+        title: s.title,
+        description: s.description,
+        features: s.features ?? [],
+      })),
+    [apiServices]
+  );
 
   return (
-    <section id="services" className="relative w-full z-0 mt-20">
+    <section
+      id="services"
+      className="relative w-full z-0 mt-20 overflow-x-hidden"
+    >
       <div
         aria-hidden="true"
         className="
@@ -205,7 +65,7 @@ export default function ServicesSection() {
           </p>
         </div>
 
-        <div className="mt-8 bg-slate-50">
+        <div className="mt-8 bg-slate-50 ">
           <ServicesCarousel services={services} />
         </div>
       </div>

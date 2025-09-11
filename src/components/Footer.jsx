@@ -16,8 +16,8 @@ export default function Footer() {
   const locale = useLocale();
 
   return (
-    <footer className="w-full bg-[#F4F6FB] py-12">
-      <div className="max-auto mx-auto px-6 lg:px-10">
+    <footer className="w-auto bg-[#F4F6FB] pt-12">
+      <div className="max-w-full max-auto mx-auto px-6 lg:px-10">
         <div
           className="bg-white rounded-3xl px-6 md:px-10 py-10
                         grid grid-cols-1 md:grid-cols-3 gap-10 items-start"
