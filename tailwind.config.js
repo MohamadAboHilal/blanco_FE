@@ -4,7 +4,12 @@ export default {
   theme: {
     extend: {},
   },
-  safelist: [{ pattern: /(bg|text)-(cyan|orange|emerald|purple)-(100|700)/ }],
+  safelist: [
+    {
+      pattern:
+        /(bg|text)-(red|orange|emerald|teal|sky|cyan|blue|indigo|violet|purple|pink|rose)-(100|700)/,
+    },
+  ],
   plugins: [require("daisyui")],
   darkMode: "class",
 };
