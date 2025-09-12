@@ -24,6 +24,14 @@ html, body, #root {
     max-height: fit-content;
 }
 
+ul .languages-list {
+    background: rgb(244, 245, 250);
+}
+
+.language-item {
+    background: rgb(244, 245, 250);
+}
+
 html[dir="rtl"],
 html[dir="rtl"] body,
 html[dir="rtl"] #root {

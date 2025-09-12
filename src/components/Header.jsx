@@ -155,11 +155,11 @@ function Header() {
                 <summary className={navTap}>
                   {lang === "ar" ? "AR" : "EN"}
                 </summary>
-                <ul className="rounded-t-none p-2 w-20">
+                <ul className="languages-list rounded-t-none p-2 w-20">
                   <li>
                     <button
                       onClick={() => change("en")}
-                      className="flex items-center gap-2 bg-white px-2 py-1 rounded active:bg-[#DFF4FF] focus:bg-[#DFF4FF] focus:outline-none"
+                      className="language-item flex items-center gap-2 px-2 py-1 rounded active:bg-white focus:bg-white focus:outline-none"
                     >
                       <img
                         src={enFlag}
@@ -172,7 +172,7 @@ function Header() {
                   <li>
                     <button
                       onClick={() => change("ar")}
-                      className="flex items-center gap-2 bg-white px-2 py-1 rounded active:bg-[#DFF4FF] focus:bg-[#DFF4FF] focus:outline-none"
+                      className="language-item flex items-center gap-2  px-2 py-1 rounded active:bg-white focus:bg-white focus:outline-none"
                     >
                       <img
                         src={flag}
