@@ -32,6 +32,7 @@ export function useLocale() {
   // Change language (await-able)
   const change = useCallback(async (lng) => {
     await i18n.changeLanguage(lng);
+    window.location.reload();
     // setLang is invoked by languageChanged listener above
   }, []);
 
