@@ -54,7 +54,10 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="px-4 sm:px-6 lg:px-8 my-16">
+    <section
+      id="contact"
+      className="px-4 sm:px-6 lg:px-8 my-16 scroll-mt-[78px]"
+    >
       <div className="mx-auto max-w-6xl">
         <div className="rounded-3xl bg-white">
           {/* Header */}

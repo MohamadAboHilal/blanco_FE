@@ -29,7 +29,10 @@ export default function FaqSection() {
   }, [faqs.length]);
 
   return (
-    <section id="faq" className="relative isolate overflow-hidden mt-20">
+    <section
+      id="faq"
+      className="relative isolate overflow-hidden mt-20 scroll-mt-[78px]"
+    >
       {/* Decorative symbol */}
       <img
         src={faqSymbol}
