@@ -1,16 +1,11 @@
 import React, { useEffect, useState, useCallback } from "react";
+import Portal from "./Portal";
 
-export default function VideoCard({
-  src, // video source (mp4/webm/ogg)
-  poster, // preview image shown on the card
-  autoPlay = true, // autoplay when modal opens
-}) {
+export default function VideoCard({ src, poster, autoPlay = true }) {
   const [open, setOpen] = useState(false);
-
   const handleOpen = () => setOpen(true);
   const handleClose = useCallback(() => setOpen(false), []);
 
-  // Close on ESC + lock scroll when open
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && handleClose();
     if (open) {
@@ -29,11 +24,10 @@ export default function VideoCard({
     <>
       {/* CARD (click to open) */}
       <div
-        className="relative w-96 max-w-3xl rounded-2xl overflow-hidden transition cursor-pointer"
+        className="relative w-full rounded-2xl overflow-hidden transition cursor-pointer"
         onClick={handleOpen}
-        aria-label={`Open player`}
+        aria-label="Open player"
       >
-        {/* Poster preview */}
         <div className="relative aspect-video bg-gray-100">
           {poster ? (
             <img
@@ -46,8 +40,6 @@ export default function VideoCard({
               No poster
             </div>
           )}
-
-          {/* Play button */}
           <div className="absolute inset-0 grid place-items-center">
             <div className="rounded-full h-16 w-16 bg-white/90 shadow-lg grid place-items-center">
               <svg
@@ -63,36 +55,37 @@ export default function VideoCard({
         </div>
       </div>
 
-      {/* MODAL (click to close) */}
+      {/* MODAL via Portal */}
       {open && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center">
-          {/* Backdrop */}
-          <button
-            aria-label="Close"
-            onClick={handleClose}
-            className="absolute inset-0 w-full h-full bg-black/40 backdrop-blur-md"
-          />
-
-          {/* Player container */}
-          <div className="relative w-[92vw] max-w-6xl max-h-[85vh] aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl">
-            {/* Close button */}
+        <Portal>
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center">
             <button
+              aria-label="Close"
               onClick={handleClose}
-              className="absolute right-3 top-3 z-10 inline-flex items-center justify-center rounded-full h-10 w-10 bg-white/90 shadow hover:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500"
-            >
-              <span className="sr-only">Close</span>✕
-            </button>
-
-            {/* HTML5 Video Player */}
-            <video
-              src={src}
-              poster={poster}
-              controls
-              autoPlay={autoPlay}
-              className="w-full h-full"
+              className="absolute inset-0 w-full h-full bg-black/50 backdrop-blur-sm"
             />
+            <div
+              role="dialog"
+              aria-modal="true"
+              className="relative w-[92vw] max-w-6xl aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl"
+            >
+              <button
+                onClick={handleClose}
+                className="absolute right-3 top-3 z-10 inline-flex items-center justify-center rounded-full h-10 w-10 bg-white/90 shadow hover:bg-white focus:outline-none focus:ring-2 focus:ring-sky-500"
+              >
+                <span className="sr-only">Close</span>✕
+              </button>
+
+              <video
+                src={src}
+                poster={poster}
+                controls
+                autoPlay={autoPlay}
+                className="w-full h-full"
+              />
+            </div>
           </div>
-        </div>
+        </Portal>
       )}
     </>
   );

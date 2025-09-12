@@ -1,133 +1,66 @@
-import React from "react";
+import React, { useMemo } from "react";
 import TipsCarousel from "../components/TipsCarousel";
-
-import iconLeaf from "../assets/leaf.svg";
-import iconSparkle from "../assets/sparkle.svg";
-import iconClock from "../assets/clock.svg";
-import iconDrop from "../assets/drop.svg";
-import iconShield from "../assets/shield.svg";
-import iconBulb from "../assets/bulb.svg";
 import starsBG from "../assets/starsBG.svg";
-
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useLocale } from "../useLocale";
+import { useHomeData } from "../contexts/HomeDataContext";
+
+function colorQuotedLocalized(title, dir) {
+  if (!title?.includes('"')) return title;
+
+  const quotes = (title.match(/"/g) || []).length;
+
+  // LTR with proper pairs → color segments between pairs
+  if (dir !== "rtl" && quotes >= 2 && quotes % 2 === 0) {
+    const out = [];
+    const parts = title.split('"');
+    // parts: [pre, q1, between, q2, after] -> odd indexes are inside quotes
+    parts.forEach((chunk, i) => {
+      if (i % 2 === 1 && chunk.length) {
+        out.push(
+          <span key={`q-${i}`} className="text-[#00B0DF]">
+            {chunk}
+          </span>
+        );
+      } else if (chunk) {
+        out.push(chunk);
+      }
+    });
+    return out;
+  }
+
+  // RTL or unbalanced quotes → color text after the last quote
+  const last = title.lastIndexOf('"');
+  if (last >= 0 && last < title.length - 1) {
+    const before = title.slice(0, last).replaceAll('"', "");
+    const after = title.slice(last + 1);
+    return [
+      before,
+      <span key="rtl-last" className="text-[#00B0DF]">
+        {after}
+      </span>,
+    ];
+  }
+
+  // Fallback: remove quotes, no color
+  return title.replaceAll('"', "");
+}
 
 export default function TipsSection() {
   const { t } = useTranslation();
   const { dir } = useLocale();
+  const { cleaningTips: apiTips, loading, error } = useHomeData();
 
-  const tips = [
-    {
-      icon: iconLeaf,
-      title: "Clean Spills ",
-      highlight: "Immediately",
-      text: "The faster you clean up spills, the less likely they are to stain. Blot, don't rub, to prevent spreading.",
-    },
-    {
-      icon: iconSparkle,
-      title: "Clean Spills ",
-      highlight: "Immediately",
-      text: "The faster you clean up spills, the less likely they are to stain. Blot to avoid spreading.",
-    },
-    {
-      icon: iconClock,
-      title: "Clean ",
-      highlight: "Top To Bottom",
-      text: "Always clean from top to bottom so dust falls to areas you haven’t cleaned yet—preventing rework.",
-    },
-    {
-      icon: iconDrop,
-      title: "Natural ",
-      highlight: "Cleaning Solutions",
-      text: "Vinegar and baking soda are powerful, eco-friendly cleaners. Mix with water for non-toxic cleaning.",
-    },
-    {
-      icon: iconShield,
-      title: "Disinfect ",
-      highlight: "High-Touch",
-      text: "Door handles, light switches, and remote controls need frequent disinfecting for best results.",
-    },
-    {
-      icon: iconBulb,
-      title: "Ventilation ",
-      highlight: "Is Key",
-      text: "Good air circulation dries surfaces faster and reduces humidity that can cause mold and mildew.",
-    },
-    {
-      icon: iconLeaf,
-      title: "Clean Spills ",
-      highlight: "Immediately",
-      text: "The faster you clean up spills, the less likely they are to stain. Blot, don't rub, to prevent spreading.",
-    },
-    {
-      icon: iconSparkle,
-      title: "Clean Spills ",
-      highlight: "Immediately",
-      text: "The faster you clean up spills, the less likely they are to stain. Blot to avoid spreading.",
-    },
-    {
-      icon: iconClock,
-      title: "Clean ",
-      highlight: "Top To Bottom",
-      text: "Always clean from top to bottom so dust falls to areas you haven’t cleaned yet—preventing rework.",
-    },
-    {
-      icon: iconDrop,
-      title: "Natural ",
-      highlight: "Cleaning Solutions",
-      text: "Vinegar and baking soda are powerful, eco-friendly cleaners. Mix with water for non-toxic cleaning.",
-    },
-    {
-      icon: iconShield,
-      title: "Disinfect ",
-      highlight: "High-Touch",
-      text: "Door handles, light switches, and remote controls need frequent disinfecting for best results.",
-    },
-    {
-      icon: iconBulb,
-      title: "Ventilation ",
-      highlight: "Is Key",
-      text: "Good air circulation dries surfaces faster and reduces humidity that can cause mold and mildew.",
-    },
-    {
-      icon: iconLeaf,
-      title: "Clean Spills ",
-      highlight: "Immediately",
-      text: "The faster you clean up spills, the less likely they are to stain. Blot, don't rub, to prevent spreading.",
-    },
-    {
-      icon: iconSparkle,
-      title: "Clean Spills ",
-      highlight: "Immediately",
-      text: "The faster you clean up spills, the less likely they are to stain. Blot to avoid spreading.",
-    },
-    {
-      icon: iconClock,
-      title: "Clean ",
-      highlight: "Top To Bottom",
-      text: "Always clean from top to bottom so dust falls to areas you haven’t cleaned yet—preventing rework.",
-    },
-    {
-      icon: iconDrop,
-      title: "Natural ",
-      highlight: "Cleaning Solutions",
-      text: "Vinegar and baking soda are powerful, eco-friendly cleaners. Mix with water for non-toxic cleaning.",
-    },
-    {
-      icon: iconShield,
-      title: "Disinfect ",
-      highlight: "High-Touch",
-      text: "Door handles, light switches, and remote controls need frequent disinfecting for best results.",
-    },
-    {
-      icon: iconBulb,
-      title: "Ventilation ",
-      highlight: "Is Key",
-      text: "Good air circulation dries surfaces faster and reduces humidity that can cause mold and mildew.",
-    },
-
-    // add more items freely; carousel pages by 9
-  ];
+  const tips = useMemo(
+    () =>
+      (apiTips ?? []).map((tip) => ({
+        id: tip.id,
+        icon: tip.icon,
+        title: colorQuotedLocalized(tip.title, dir), // << here
+        text: tip.description,
+      })),
+    [apiTips, dir]
+  );
 
   return (
     <section
@@ -153,7 +86,21 @@ export default function TipsSection() {
         </div>
 
         {/* 3×3 carousel */}
-        <TipsCarousel tips={tips} />
+        {loading ? (
+          <div className="h-[260px] grid place-items-center text-slate-400">
+            {t("common.loading") || "Loading…"}
+          </div>
+        ) : error ? (
+          <div className="p-6 text-center text-red-600">
+            {t("common.failed") || "Failed to load tips."}
+          </div>
+        ) : tips.length === 0 ? (
+          <div className="p-6 text-center text-slate-500">
+            {t("tips.none") || "No tips available."}
+          </div>
+        ) : (
+          <TipsCarousel tips={tips} />
+        )}
       </div>
     </section>
   );

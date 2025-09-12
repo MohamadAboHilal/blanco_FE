@@ -47,11 +47,11 @@ export default function ServicesSection() {
         style={{ backgroundImage: `url(${servicesBg})` }}
       />
 
-      <div
+      {/* <div
         aria-hidden="true"
         className="absolute -left-32 top-36 w-[400px] h-[400px] -z-10 
                bg-[#E5F9FF] rounded-full blur-[80px]"
-      />
+      /> */}
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-16">
         <div className="text-center max-w-3xl mx-auto">

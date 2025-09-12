@@ -36,10 +36,10 @@ export default function ReviewsSection() {
         className="pointer-events-none select-none absolute top-1/2 right-0 -translate-y-1/2 w-[300px] h-auto z-20 opacity-90"
       />
 
-      <div
+      {/* <div
         aria-hidden="true"
         className="absolute -left-24 -top-10 w-[420px] h-[420px] z-0 bg-[#00B0DF]/15 rounded-full blur-[150px]"
-      />
+      /> */}
 
       <div className="relative z-30 max-w-7xl mx-auto px-6 lg:px-10">
         <div className="text-center mb-10">
