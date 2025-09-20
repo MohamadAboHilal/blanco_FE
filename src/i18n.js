@@ -145,6 +145,13 @@ const resources = {
         visionText:
           "To become Syria’s leading name in professional cleaning services, setting the benchmark for quality and consistency.\nExpanding across all cities to be the go-to reference for cleanliness solutions.\nIn the next decade, Blanco will become a leading national provider of cleanliness solutions by expanding into materials, tools, and innovations that redefine how Syrian institutions manage cleanliness.",
       },
+      labels: {
+        syria: "Syria",
+        saudiArabia: "Saudi Arabia",
+        uae: "UAE",
+        turkey: "Turkey",
+        germany: "Germany",
+      },
     },
   },
   ar: {
@@ -291,6 +298,13 @@ const resources = {
         vision: "رؤيتنا",
         visionText:
           "أن تصبح بلانكو الاسم الرائد في سوريا في مجال خدمات التنظيف الاحترافية، وأن تضع معايير للجودة والاتساق.\nالتوسع في جميع المدن لتكون المرجع الأول لحلول النظافة.\nخلال العقد القادم، ستصبح بلانكو مزوداً وطنياً رائداً لحلول النظافة عبر التوسع في المواد والأدوات والابتكارات التي تعيد تعريف كيفية إدارة المؤسسات السورية للنظافة.",
+      },
+      labels: {
+        syria: "سوريا",
+        saudiArabia: "السعودية",
+        uae: "الإمارات",
+        turkey: "تركيا",
+        germany: "ألمانيا",
       },
     },
   },
