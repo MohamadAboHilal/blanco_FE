@@ -143,13 +143,9 @@ export default function Footer() {
                   </button>
                 </li>
                 <li>
-                  <button
-                    type="button"
-                    onClick={() => goToHash("#aboutBlanco")}
-                    className="hover:underline"
-                  >
+                  <NavLink to="/about" className="hover:underline">
                     {t("footer.about")}
-                  </button>
+                  </NavLink>
                 </li>
                 <li>
                   <button

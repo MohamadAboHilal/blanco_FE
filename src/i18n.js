@@ -140,10 +140,10 @@ const resources = {
           "To provide dependable and professional cleaning services that help businesses and institutions maintain a clean, safe, and welcoming environment, every day.",
         values: "Our Values",
         valuesText:
-          "To provide dependable and professional cleaning services that help businesses and institutions maintain a clean, safe, and welcoming environment, every day.",
+          "1. Integrity – We do what is right, even when no one is watching.\n2. Transparency – Clear communication and honest service at every step.\n3. Credibility – Trust earned through reliable and consistent performance.\n4. Quality – Excellence is not an act, it is our habit.\n5. Accountability – We take full responsibility for our work.\n6. Customer-Centric – Your needs shape our solutions.",
         vision: "Our Vision",
         visionText:
-          "To become Syria’s leading name in professional cleaning services, setting the benchmark for quality and consistency, and expanding across all cities to be the go-to reference for cleanliness solutions.",
+          "To become Syria’s leading name in professional cleaning services, setting the benchmark for quality and consistency.\nExpanding across all cities to be the go-to reference for cleanliness solutions.\nIn the next decade, Blanco will become a leading national provider of cleanliness solutions by expanding into materials, tools, and innovations that redefine how Syrian institutions manage cleanliness.",
       },
     },
   },
@@ -280,17 +280,17 @@ const resources = {
         contact: "اتصل بنا",
       },
       aboutBlanco: {
-        about: "عن",
+        about: "حول",
         blanco: "بلانكو",
         mission: "مهمتنا",
         missionText:
-          "تقديم خدمات تنظيف موثوقة واحترافية تساعد الشركات والمؤسسات على الحفاظ على بيئة نظيفة، آمنة، ومرحبة بشكل يومي.",
+          "تقديم خدمات تنظيف موثوقة واحترافية تساعد الشركات والمؤسسات على الحفاظ يومياً على بيئة نظيفة وآمنة ومرحبة.",
         values: "قيمنا",
         valuesText:
-          "تقديم خدمات تنظيف موثوقة واحترافية تساعد الشركات والمؤسسات على الحفاظ على بيئة نظيفة، آمنة، ومرحبة بشكل يومي.",
+          "1. النزاهة – نفعل ما هو صواب حتى عندما لا يرانا أحد.\n2. الشفافية – تواصل واضح وخدمة صادقة في كل خطوة.\n3. المصداقية – ثقة تُكتسب من خلال الأداء الموثوق والمتسق.\n4. الجودة – التميز ليس فعلاً مؤقتاً، بل عادتنا الدائمة.\n5. المساءلة – نتحمل المسؤولية الكاملة عن عملنا.\n6. التركيز على العميل – احتياجاتكم تشكل حلولنا.",
         vision: "رؤيتنا",
         visionText:
-          "أن نصبح الاسم الرائد في سوريا في مجال خدمات التنظيف الاحترافية، ونضع المعيار للجودة والالتزام، مع التوسع في جميع المدن لنكون المرجع الأول لحلول النظافة.",
+          "أن تصبح بلانكو الاسم الرائد في سوريا في مجال خدمات التنظيف الاحترافية، وأن تضع معايير للجودة والاتساق.\nالتوسع في جميع المدن لتكون المرجع الأول لحلول النظافة.\nخلال العقد القادم، ستصبح بلانكو مزوداً وطنياً رائداً لحلول النظافة عبر التوسع في المواد والأدوات والابتكارات التي تعيد تعريف كيفية إدارة المؤسسات السورية للنظافة.",
       },
     },
   },

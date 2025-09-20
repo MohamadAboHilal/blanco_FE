@@ -78,7 +78,7 @@ export default function AboutBlancoSection() {
                   />
                 </div>
 
-                <p className="mt-4 text-[15px] md:text-base leading-7 text-[#6B7280]">
+                <p className="mt-4 text-[15px] md:text-base leading-7 text-[#6B7280] whitespace-pre-line">
                   {c.text}
                 </p>
               </div>

@@ -140,12 +140,14 @@ function Header() {
             </li>
 
             <li>
-              <button
-                onClick={() => goToHash("#aboutBlanco")}
-                className={navTap}
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  `${navTap} ${isActive ? activeClass : ""}`
+                }
               >
                 {t("header.about")}
-              </button>
+              </NavLink>
             </li>
 
             <li>
