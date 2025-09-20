@@ -7,6 +7,7 @@ import igIcon from "../assets/instagram.svg";
 import phoneIcon from "../assets/call-calling.svg";
 import emailIcon from "../assets/sms-tracking.svg";
 import wsIcon from "../assets/Group 1000003034.svg";
+import Blogo from "../assets/B_logo.png";
 import { useTranslation } from "react-i18next";
 import { useLocale } from "../useLocale";
 import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
@@ -90,97 +91,128 @@ export default function Footer() {
 
   return (
     <footer className="w-auto bg-[#F4F6FB] pt-12">
-      <div className="max-w-full max-auto mx-auto px-6 lg:px-10">
-        <div className="bg-white rounded-3xl px-6 md:px-10 py-10 grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-          {/* LEFT */}
-          <div className="justify-self-start flex flex-col gap-5">
-            <img src={logo} alt="Blanco Logo" className="h-12 w-auto" />
-            <div>
-              <p className="text-[#00B0DF] font-semibold">{t("footer.make")}</p>
-              <p className="text-gray-500 text-sm">{t("footer.cleaning")}</p>
-            </div>
-            <div className="flex gap-4">
-              {socials.map((s, i) => (
-                <a
-                  key={i}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 flex items-center justify-center rounded-full bg-[#F9FBFF] shadow hover:scale-110 transition"
-                  aria-label={s.label}
-                >
-                  <img src={s.icon} alt={s.label} className="w-10 h-10" />
-                </a>
-              ))}
-            </div>
-          </div>
+      <div className="max-w-full mx-auto px-6 lg:px-10">
+        {/* Remove rounded box, use plain panel */}
+        <div className="px-0 md:px-0 py-10">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-0 items-center justify-items-center">
+            {/* LEFT — Brand + tagline + socials */}
+            <div className="flex flex-col gap-2 items-center justify-start w-full">
+              <img
+                src={logo}
+                alt="Blanco Logo"
+                className="h-8 w-auto mb-1"
+                style={{ objectFit: "contain" }}
+              />
 
-          {/* MIDDLE */}
-          <div className="justify-self-center text-left">
-            <h4 className="text-[#00B0DF] font-semibold mb-4">
-              {t("footer.useful")}
-            </h4>
-            <ul className="space-y-3 text-slate-800 font-medium list-none p-0 m-0">
-              <li>
-                <button
-                  type="button"
-                  className="bg-transparent p-0 m-0 text-inherit hover:underline cursor-pointer"
-                  onClick={() => goToHash("#services")}
-                >
-                  {t("footer.service")}
-                </button>
-              </li>
-              <li>
-                <NavLink to="/about">{t("header.about")}</NavLink>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  className="bg-transparent p-0 m-0 text-inherit hover:underline cursor-pointer"
-                  onClick={() => goToHash("#contact")}
-                >
-                  {t("footer.contact")}
-                </button>
-              </li>
-            </ul>
-          </div>
-
-          {/* RIGHT */}
-          <div className="justify-self-end">
-            <h4 className="text-[#00B0DF] font-semibold mb-4">
-              {t("footer.find")}
-            </h4>
-            <ul className="space-y-4 text-slate-800 font-medium list-none p-0 m-0 w-max">
-              <li className="flex items-center gap-3">
-                <img src={phoneIcon} alt="phone" className="w-5 h-5" />
-                <a href={telHref} className="hover:underline">
-                  <LtrNum>{callNumber}</LtrNum>
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <img src={emailIcon} alt="email" className="w-5 h-5" />
-                <a href={`mailto:${mail}`} className="hover:underline">
-                  {mail}
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <img src={wsIcon} alt="whatsapp" className="w-5 h-5" />
-                <a
-                  href={waHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline"
-                >
-                  <LtrNum>{waNumber}</LtrNum>
-                </a>
-              </li>
-            </ul>
-
-            {loading && (
-              <div className="mt-3 text-xs text-slate-400">
-                {t("common.loading") || "Loading…"}
+              <div className="text-center w-full">
+                <p className="text-[#00B0DF] font-semibold tracking-wide">
+                  {t("footer.make")}
+                </p>
+                <p className="text-slate-500 text-sm">{t("footer.cleaning")}</p>
               </div>
-            )}
+
+              <div className="flex gap-4 mt-1 justify-center w-full">
+                {socials.map((s, i) => (
+                  <a
+                    key={i}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                    className="w-12 h-12 flex items-center justify-center rounded-full bg-[#F2F8FF] ring-1 ring-cyan-100/60 hover:scale-110 transition"
+                  >
+                    <img src={s.icon} alt={s.label} className="w-12 h-12" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* MIDDLE LEFT — Useful Links */}
+            <div className="flex flex-col items-center justify-center w-full">
+              <h4 className="text-[#00B0DF] font-semibold text-xl mb-4 text-center w-full">
+                {t("footer.useful")}
+              </h4>
+              <ul className="space-y-3 text-slate-900 font-semibold text-center w-full">
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => goToHash("#services")}
+                    className="hover:underline"
+                  >
+                    {t("footer.service")}
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => goToHash("#aboutBlanco")}
+                    className="hover:underline"
+                  >
+                    {t("footer.about")}
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => goToHash("#contact")}
+                    className="hover:underline"
+                  >
+                    {t("footer.contact")}
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            {/* MIDDLE RIGHT — You Can Find Us */}
+            <div className="flex flex-col items-center justify-center w-full">
+              <h4 className="text-[#00B0DF] font-semibold text-xl mb-4 text-center w-full">
+                {t("footer.find")}
+              </h4>
+              <ul className="space-y-3 text-slate-900 font-medium text-center w-full">
+                <li className="flex items-center gap-2 justify-center w-full">
+                  <img src={phoneIcon} alt="phone" className="w-5 h-5" />
+                  <a href={telHref} className="hover:underline">
+                    <LtrNum>{callNumber}</LtrNum>
+                  </a>
+                </li>
+                <li className="flex items-center gap-2 justify-center w-full">
+                  <img src={emailIcon} alt="email" className="w-5 h-5" />
+                  <a href={`mailto:${mail}`} className="hover:underline">
+                    {mail}
+                  </a>
+                </li>
+                <li className="flex items-center gap-2 justify-center w-full">
+                  <img src={wsIcon} alt="whatsapp" className="w-5 h-5" />
+                  <a
+                    href={waHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline"
+                  >
+                    <LtrNum>{waNumber}</LtrNum>
+                  </a>
+                </li>
+              </ul>
+
+              {loading && (
+                <div className="mt-3 text-xs text-slate-400 text-center w-full">
+                  {t("common.loading") || "Loading…"}
+                </div>
+              )}
+            </div>
+
+            {/* RIGHT — Decorative B logo and center all content */}
+            <div className="hidden md:flex flex-col items-center justify-center h-full text-center w-full">
+              <div className="flex flex-col items-center justify-center h-full w-full">
+                <img
+                  src={Blogo}
+                  alt=""
+                  className="w-[110px] h-auto select-none pointer-events-none"
+                  style={{ opacity: 0.3 }}
+                />
+                {/* Add any additional content here if needed, all centered */}
+              </div>
+            </div>
           </div>
         </div>
       </div>

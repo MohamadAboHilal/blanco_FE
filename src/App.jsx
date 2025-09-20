@@ -56,13 +56,30 @@ function HomePage() {
 
 export default function App() {
   return (
+    // <>
+    //
+    //
+    //     <Routes>
+    //       <Route path="/" element={<HomePage />} />
+    //       <Route path="/about" element={<AboutPage />} />
+    //     </Routes>
+    //
+    //
+    //   </HomeDataProvider>
+    // </>
     <>
       <HomeDataProvider>
         <Header />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-        </Routes>
+        <Home />
+        <AboutPage />
+        <ServicesSection />
+        <ClientsSection />
+        <Work />
+        <ReviewsSection />
+
+        <TipsSection />
+        <FaqSection />
+        <ContactSection />
         <FloatingWhatsApp />
         <Footer />
       </HomeDataProvider>

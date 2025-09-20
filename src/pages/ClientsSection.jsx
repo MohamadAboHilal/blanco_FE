@@ -16,9 +16,12 @@ export default function ClientsSection() {
   );
 
   return (
-    <section id="clients" className="w-full py-12 bg-white">
+    <section
+      id="clients"
+      className="w-full py-12 my-20 bg-[#f5f6fa] overflow-visible"
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[360px_minmax(0,1fr)] items-center gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[360px_minmax(0,1fr)] items-center gap-8 bg-[#f5f6fa]">
           {/* Left — fixed content */}
           <div className="space-y-2">
             <h2 className="text-3xl md:text-4xl font-bold">

@@ -12,9 +12,11 @@ const resources = {
         faq: "FAQ",
       },
       hero: {
-        title1: "Make It Sparkle",
-        title2: "Cleaning Services Company",
+        // title1: "Make It Sparkle",
+        title1: "Cleaning Services Company",
+        title2: "Make It Sparkle",
         sub: "Transform your space with our Expert Cleaning Team. From homes to offices, we deliver spotless results every time.",
+        highlight: "Expert Cleaning Team",
         guarantee: "100% Satisfaction Guaranteed",
         call: "Call",
       },
@@ -56,19 +58,20 @@ const resources = {
       faq: {
         frequentlyAsked: "Frequently Asked",
         questions: "Questions",
-        p1: "Find Answers To Common Questions About",
-        p2: "Our Cleaning Services.",
+        p1: "Find answers to common questions about",
+        p2: "our cleaning services.",
       },
       contact: {
         getIn: "Get in",
         touch: "Touch",
         description:
-          "Ready to experience professional cleaning services? Contact us today for a free consultation and a customized cleaning plan foryour business.",
+          "Ready to experience professional cleaning services? Contact us today for a free consultation and a customized cleaning plan for your business.",
         email: "Email",
         name: "Name",
         message: "Your Message",
         send: "Send",
         alert: "Thanks! Your message has been sent.",
+        phone: "Phone Number",
       },
       about: {
         who: "Who",
@@ -87,18 +90,31 @@ const resources = {
           "To become Syria’s leading name in professional cleaning services, setting the benchmark for quality and consistency, and expanding across all cities to be the go-to reference for cleanliness solutions.",
       },
       specializations: {
-        offices: "Offices & Corporate Buildings",
-        schools: "Schools & Universities",
-        healthcare: "Healthcare Centers",
-        retail: "Retail Stores & Restaurants",
+        building: "Offices & Corporate Buildings",
+        buildingDescription:
+          "We provide thorough cleaning services to maintain a clean, professional, and productive work environment.",
+        school: "Schools & Universities",
+        schoolDescription:
+          "Creating a safe and hygienic learning environment with regular and deep cleaning services.",
+        hospital: "Healthcare Centers",
+        hospitalDescription:
+          "Specialized cleaning solutions that meet health and safety standards to protect staff and patients",
+        shop: "Retail Stores & Restaurants",
+        shopDescription:
+          "We ensure your space is spotless and welcoming for your customers and staff",
         government: "Governmental Buildings",
+        governmentDescription:
+          "Reliable cleaning services tailored to the needs of public service facilities.",
+        house: "Residential Cleaning",
+        houseDescription:
+          "Making your home shine with customized cleaning plans that suit your lifestyle.",
       },
       work: {
         our: "Our",
         work: "Work",
         gallery: "Gallery",
         description:
-          "See The Transformation - Before And After Photos & Videos",
+          "See the transformation - Before and after photos & videos",
         all: "All Work",
         beforeAfter: "Before & After",
         video: "Video",
@@ -116,6 +132,19 @@ const resources = {
         about: "About Us",
         contact: "Contact Us",
       },
+      aboutBlanco: {
+        about: "About",
+        blanco: "Blanco",
+        mission: "Our Mission",
+        missionText:
+          "To provide dependable and professional cleaning services that help businesses and institutions maintain a clean, safe, and welcoming environment, every day.",
+        values: "Our Values",
+        valuesText:
+          "To provide dependable and professional cleaning services that help businesses and institutions maintain a clean, safe, and welcoming environment, every day.",
+        vision: "Our Vision",
+        visionText:
+          "To become Syria’s leading name in professional cleaning services, setting the benchmark for quality and consistency, and expanding across all cities to be the go-to reference for cleanliness solutions.",
+      },
     },
   },
   ar: {
@@ -127,11 +156,20 @@ const resources = {
         about: "من نحن",
         faq: "الأسئلة الشائعة",
       },
+      // hero: {
+      //   title1: "خلّيها تلمع",
+      //   title2: "شركة خدمات تنظيف",
+      //   sub: "حوّل مساحتك مع فريق التنظيف الخبير. من المنازل إلى المكاتب، نقدّم نتائج مثالية في كل مرة.",
+      //   guarantee: "رضاكم 100% مضمون",
+      //   call: "اتصل",
+      // },
       hero: {
-        title1: "خلّيها تلمع",
-        title2: "شركة خدمات تنظيف",
+        // title1: "Make It Sparkle",
+        title1: "شركة خدمات تنظيف",
+        title2: "خلّيها تلمع",
         sub: "حوّل مساحتك مع فريق التنظيف الخبير. من المنازل إلى المكاتب، نقدّم نتائج مثالية في كل مرة.",
-        guarantee: "رضاكم 100% مضمون",
+        highlight: "فريق التنظيف الخبير",
+        guarantee: "100% رضا مضمون",
         call: "اتصل",
       },
       about: {
@@ -182,6 +220,7 @@ const resources = {
         message: "رسالتك",
         send: "إرسال",
         alert: "شكراً! تم إرسال رسالتك.",
+        phone: "رقم الهاتف",
       },
       about: {
         who: "من",
@@ -200,11 +239,23 @@ const resources = {
           "أن نصبح الاسم الرائد في سوريا في خدمات التنظيف الاحترافية، مع ترسيخ معيار للجودة والاتساق، والتوسع في جميع المدن لنكون الوجهة الأولى لحلول النظافة.",
       },
       specializations: {
-        offices: "المكاتب والمباني التجارية",
-        schools: "المدارس والجامعات",
-        healthcare: "المراكز الصحية",
-        retail: "المتاجر والمطاعم",
+        building: "المكاتب والمباني الإدارية",
+        buildingDescription:
+          "نقدّم خدمات تنظيف شاملة للحفاظ على بيئة عمل نظيفة، احترافية، ومنتجة.",
+        school: "المدارس والجامعات",
+        schoolDescription:
+          "نوفّر بيئة تعليمية آمنة وصحية من خلال خدمات التنظيف الدورية والعميقة.",
+        hospital: "المراكز الصحية",
+        hospitalDescription:
+          "حلول تنظيف متخصصة تلبي معايير الصحة والسلامة لحماية الموظفين والمرضى.",
+        shop: "المتاجر والمطاعم",
+        shopDescription: "نضمن أن تكون مساحتك نظيفة ومرحبة بالعملاء والموظفين.",
         government: "المباني الحكومية",
+        governmentDescription:
+          "خدمات تنظيف موثوقة مصممة لتلبية احتياجات المرافق العامة.",
+        house: "تنظيف المنازل",
+        houseDescription:
+          "نجعل منزلك متألقًا بخطط تنظيف مخصصة تناسب أسلوب حياتك.",
       },
       work: {
         our: "معرض",
@@ -227,6 +278,19 @@ const resources = {
         service: "الخدمات",
         about: "من نحن",
         contact: "اتصل بنا",
+      },
+      aboutBlanco: {
+        about: "عن",
+        blanco: "بلانكو",
+        mission: "مهمتنا",
+        missionText:
+          "تقديم خدمات تنظيف موثوقة واحترافية تساعد الشركات والمؤسسات على الحفاظ على بيئة نظيفة، آمنة، ومرحبة بشكل يومي.",
+        values: "قيمنا",
+        valuesText:
+          "تقديم خدمات تنظيف موثوقة واحترافية تساعد الشركات والمؤسسات على الحفاظ على بيئة نظيفة، آمنة، ومرحبة بشكل يومي.",
+        vision: "رؤيتنا",
+        visionText:
+          "أن نصبح الاسم الرائد في سوريا في مجال خدمات التنظيف الاحترافية، ونضع المعيار للجودة والالتزام، مع التوسع في جميع المدن لنكون المرجع الأول لحلول النظافة.",
       },
     },
   },

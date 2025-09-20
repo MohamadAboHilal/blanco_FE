@@ -83,7 +83,7 @@ export default function ServicesCarousel({ services = [], dir: dirProp }) {
       <div
         ref={emblaRef}
         dir={dir}
-        className="overflow-x-hidden overflow-y-visible py-8 select-none"
+        className="overflow-x-hidden overflow-y-visible py-2 select-none"
       >
         {/* Track — use gap so spacing is direction-agnostic */}
         <div className="flex gap-6 pb-2 px-4">

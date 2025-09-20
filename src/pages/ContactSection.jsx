@@ -8,6 +8,7 @@ export default function ContactSection() {
   const [errorMsg, setErrorMsg] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
@@ -17,6 +18,7 @@ export default function ContactSection() {
     const payload = {
       name: name.trim(),
       email: email.trim(),
+      contact_number: phone.trim(),
       message: message.trim(),
     };
 
@@ -45,6 +47,7 @@ export default function ContactSection() {
       setStatus("sent");
       setName("");
       setEmail("");
+      setPhone("");
       setMessage("");
       setTimeout(() => setStatus(null), 3000);
     } catch (err) {
@@ -104,6 +107,16 @@ export default function ContactSection() {
                   style={{ boxShadow: "0 0 10px rgba(0,0,0,0.08)" }}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                  type="text"
+                  name="phone"
+                  placeholder={t("contact.phone") || "Phone number"}
+                  required
+                  className="input w-full max-w-xs"
+                  style={{ boxShadow: "0 0 10px rgba(0,0,0,0.08)" }}
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                 />
               </div>
 

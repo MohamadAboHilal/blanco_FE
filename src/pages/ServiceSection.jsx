@@ -31,7 +31,7 @@ export default function ServicesSection() {
   return (
     <section
       id="services"
-      className="relative w-full z-0 mt-20 overflow-x-hidden scroll-mt-[78px]"
+      className="relative w-full z-0 mt-20 overflow-x-hidden scroll-mt-[78px] bg-[#f5f6fa]"
     >
       <div
         aria-hidden="true"

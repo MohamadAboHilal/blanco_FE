@@ -44,7 +44,7 @@ export default function Work() {
   const { dir } = useLocale();
   const { galleries, loading, error } = useHomeData();
 
-  const [filter, setFilter] = useState("all"); // 'all' | 'beforeAfter' | 'video'
+  const [filter, setFilter] = useState("beforeAfter"); // 'beforeAfter' | 'video'
 
   const filtered = useMemo(() => {
     const all = galleries ?? [];
@@ -56,7 +56,7 @@ export default function Work() {
     if (filter === "video") {
       return all.filter((g) => g.type === "video" && g.video);
     }
-    return all;
+    return [];
   }, [galleries, filter]);
 
   const columns = useMemo(() => toColumns(filtered), [filtered]);
@@ -65,7 +65,7 @@ export default function Work() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     dragFree: true,
-    align: filter === "all" ? "start" : "center",
+    align: "center",
     containScroll: "trimSnaps",
     direction: dir,
   });
@@ -89,14 +89,6 @@ export default function Work() {
         </p>
 
         <div className="inline-flex rounded-xl bg-gray-100 p-1 shadow-sm gap-4">
-          <button
-            className={`${pillBase} ${
-              filter === "all" ? activeClass : inactiveClass
-            }`}
-            onClick={() => setFilter("all")}
-          >
-            {t("work.all")}
-          </button>
           <button
             className={`${pillBase} ${
               filter === "beforeAfter" ? activeClass : inactiveClass
@@ -132,9 +124,7 @@ export default function Work() {
             <div className="overflow-hidden" ref={emblaRef} dir={dir}>
               {/* Track: each slide is a vertical column of two cards */}
               <div
-                className={`flex gap-[var(--work-gap)]${
-                  filter !== "all" ? " justify-center" : ""
-                }`}
+                className="flex gap-[var(--work-gap)] justify-center"
                 style={{ "--work-gap": "2.5rem" }}
               >
                 {columns.map((col, idx) => (

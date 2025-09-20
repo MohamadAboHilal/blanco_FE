@@ -38,7 +38,7 @@ export default function FaqSection() {
         src={faqSymbol}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none select-none absolute left-[45rem] bottom-[2rem] w-[120px] md:w-[160px] lg:w-[200px] h-auto z-0 opacity-90"
+        className="pointer-events-none mt-16 select-none absolute left-[45rem] bottom-[2rem] w-[120px] md:w-[160px] lg:w-[200px] h-auto z-0 opacity-90"
       />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -49,7 +49,9 @@ export default function FaqSection() {
               <div>
                 <h2 className="text-4xl md:text-4xl font-semibold leading-tight text-slate-900">
                   <span>✨{t("faq.frequentlyAsked")} </span>
-                  <span className="text-[#00B0DF]">{t("faq.questions")}</span>
+                  <span className="text-[#00B0DF] pl-12">
+                    {t("faq.questions")}
+                  </span>
                 </h2>
                 <p className="mt-4 text-[#061B2D] text-xl md:text-lg font-bold">
                   {t("faq.p1")} <br /> {t("faq.p2")}
