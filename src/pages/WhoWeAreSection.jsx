@@ -78,7 +78,7 @@ export default function WhoWeAreSection() {
   return (
     <section
       id="aboutBlanco"
-      className="relative isolate w-full py-14 bg-[#F9FBFF] "
+      className="relative isolate w-full pt-14 bg-[#F9FBFF] "
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10 mb-12">
         {/* panel: make it a stacking context and clip overflow */}
