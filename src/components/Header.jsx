@@ -153,7 +153,7 @@ function Header() {
                 <summary className={navTap}>
                   {lang === "ar" ? "AR" : "EN"}
                 </summary>
-                <ul className="rounded-t-none p-2 w-20">
+                <ul className="rounded-t-none p-2 w-20 bg-white">
                   <li>
                     <button
                       onClick={() => change("en")}
