@@ -137,7 +137,8 @@ const resources = {
         blanco: "Blanco",
         mission: "Our Mission",
         missionText:
-          "To provide dependable and professional cleaning services that help businesses and institutions maintain a clean, safe, and welcoming environment, every day.",
+          "To provide dependable and professional cleaning services that help businesses and institutions maintain a clean, safe, and welcoming environment, every day.\n" +
+            "Our mission is not limited to cleaning spaces, but also to promoting the concept of cleanliness in society as a way of life.",
         values: "Our Values",
         valuesText:
           "1. Integrity – We do what is right, even when no one is watching.\n2. Transparency – Clear communication and honest service at every step.\n3. Credibility – Trust earned through reliable and consistent performance.\n4. Quality – Excellence is not an act, it is our habit.\n5. Accountability – We take full responsibility for our work.\n6. Customer-Centric – Your needs shape our solutions.",
@@ -240,7 +241,8 @@ const resources = {
         ourSpecializations: "تخصصاتنا",
         ourMission: "مهمتنا",
         missionText:
-          "تقديم خدمات تنظيف موثوقة واحترافية تساعد الشركات والمؤسسات في الحفاظ على بيئة نظيفة وآمنة ومرحبة، كل يوم.",
+            "تقديم خدمات تنظيف موثوقة واحترافية تساعد الشركات والمؤسسات على الحفاظ يومياً على بيئة نظيفة وآمنة ومرحبة.\n" +
+            "مهمتنا لا تقتصر على تنظيف الأماكن، بل على تعزيز مفهوم النظافة في المجتمع كأسلوب حياة.",
         ourVision: "رؤيتنا",
         visionText:
           "أن نصبح الاسم الرائد في سوريا في خدمات التنظيف الاحترافية، مع ترسيخ معيار للجودة والاتساق، والتوسع في جميع المدن لنكون الوجهة الأولى لحلول النظافة.",
@@ -291,7 +293,8 @@ const resources = {
         blanco: "بلانكو",
         mission: "مهمتنا",
         missionText:
-          "تقديم خدمات تنظيف موثوقة واحترافية تساعد الشركات والمؤسسات على الحفاظ يومياً على بيئة نظيفة وآمنة ومرحبة.",
+          "تقديم خدمات تنظيف موثوقة واحترافية تساعد الشركات والمؤسسات على الحفاظ يومياً على بيئة نظيفة وآمنة ومرحبة.\n" +
+            "مهمتنا لا تقتصر على تنظيف الأماكن، بل على تعزيز مفهوم النظافة في المجتمع كأسلوب حياة.",
         values: "قيمنا",
         valuesText:
           "1. النزاهة – نفعل ما هو صواب حتى عندما لا يرانا أحد.\n2. الشفافية – تواصل واضح وخدمة صادقة في كل خطوة.\n3. المصداقية – ثقة تُكتسب من خلال الأداء الموثوق والمتسق.\n4. الجودة – التميز ليس فعلاً مؤقتاً، بل عادتنا الدائمة.\n5. المساءلة – نتحمل المسؤولية الكاملة عن عملنا.\n6. التركيز على العميل – احتياجاتكم تشكل حلولنا.",

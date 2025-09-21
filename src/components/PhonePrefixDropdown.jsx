@@ -46,7 +46,7 @@ export default function PhonePrefixDropdown({
       {/* Menu */}
       <ul
         tabIndex={0}
-        className={`dropdown-content menu p-2 shadow bg-base-100 rounded-box w-56 z-50 ${
+        className={`dropdown-content menu p-2 shadow bg-base-100 rounded-box w-56 z-50 bg-white ${
           rtl ? "text-right" : "text-left"
         }`}
       >
