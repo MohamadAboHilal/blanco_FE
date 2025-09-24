@@ -4,16 +4,17 @@ export default function ReviewCard({ avatar, name, role, text, rating }) {
   return (
     <div
       className="
-        w-full max-w-[422px] h-[198px]       /* ~421.75 × 198 */
+        w-full max-w-[422px] min-h-[180px] max-h-[220px]
+        sm:max-w-full
         rounded-[20px] bg-white
         shadow-2xl shadow-black/5
-        p-6
+        p-4 sm:p-6
         flex flex-col
       "
       style={{ boxShadow: "0 0 30px rgba(0,0,0,0.1)", opacity: 1 }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-4 min-w-0">
           <img src={avatar} alt={name} className="w-14 h-14 rounded-full" />
           <div className="min-w-0">
@@ -25,8 +26,11 @@ export default function ReviewCard({ avatar, name, role, text, rating }) {
             </p>
           </div>
         </div>
-        <span className="text-sm font-semibold text-amber-700 bg-amber-100 px-2.5 py-1 rounded-lg">
-          +{rating} ★
+        <span
+          className="flex items-center text-sm font-semibold text-amber-700 bg-amber-100 px-2.5 py-1 rounded-lg"
+          style={{ minWidth: 60, justifyContent: "center" }}
+        >
+          +{rating} <span style={{ fontSize: 18, marginLeft: 2 }}>★</span>
         </span>
       </div>
 

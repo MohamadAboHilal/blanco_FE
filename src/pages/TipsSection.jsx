@@ -56,7 +56,7 @@ export default function TipsSection() {
       (apiTips ?? []).map((tip) => ({
         id: tip.id,
         icon: tip.icon,
-        title: colorQuotedLocalized(tip.title, dir), // << here
+        title: colorQuotedLocalized(tip.title, dir),
         text: tip.description,
       })),
     [apiTips, dir]
@@ -65,37 +65,37 @@ export default function TipsSection() {
   return (
     <section
       id="tips"
-      className="w-full bg-[#FBF4ED] pt-14 pb-36 bg-repeat-x bg-bottom bg-contain"
+      className="w-full bg-[#FBF4ED] pt-8 pb-20 sm:pt-12 sm:pb-28 md:pt-14 md:pb-36 bg-repeat-x bg-bottom bg-contain"
       style={{
         backgroundImage: `url(${starsBG})`,
         backgroundPosition: "center bottom",
         backgroundSize: "min(1200px, 95vw) auto",
       }}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
         {/* Heading */}
-        <div className="text-center mb-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
+        <div className="text-center mb-8 sm:mb-10">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900">
             ✨ {t("tips.professional")}{" "}
             <span className="text-[#00B0DF]">{t("tips.cleaning")}</span>{" "}
             {t("tips.tips")}
           </h2>
-          <p className="mt-3 text-slate-700 text-2xl font-semibold pt-6">
+          <p className="mt-2 sm:mt-3 text-slate-700 text-lg sm:text-xl md:text-2xl font-semibold pt-4 sm:pt-6">
             {t("tips.description")}
           </p>
         </div>
 
         {/* 3×3 carousel */}
         {loading ? (
-          <div className="h-[260px] grid place-items-center text-slate-400">
+          <div className="h-[180px] sm:h-[220px] md:h-[260px] grid place-items-center text-slate-400">
             {t("common.loading") || "Loading…"}
           </div>
         ) : error ? (
-          <div className="p-6 text-center text-red-600">
+          <div className="p-4 sm:p-6 text-center text-red-600">
             {t("common.failed") || "Failed to load tips."}
           </div>
         ) : tips.length === 0 ? (
-          <div className="p-6 text-center text-slate-500">
+          <div className="p-4 sm:p-6 text-center text-slate-500">
             {t("tips.none") || "No tips available."}
           </div>
         ) : (

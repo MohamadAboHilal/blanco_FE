@@ -14,7 +14,24 @@ export default function TipsCarousel({ tips = [] }) {
   const { dir } = useLocale(); // 'ltr' | 'rtl'
   const isRtl = dir === "rtl";
 
-  const pages = useMemo(() => chunkArray(tips, 6), [tips]);
+  // Responsive chunking: 2 per page for mobile, 4 for tablets, 6 for large screens
+  const [pageSize, setPageSize] = useState(6);
+  useEffect(() => {
+    function handleResize() {
+      const w = window.innerWidth;
+      if (w < 640) {
+        setPageSize(2); // 1 col × 2 rows
+      } else if (w < 1024) {
+        setPageSize(4); // 2 col × 2 rows
+      } else {
+        setPageSize(6); // 3 col × 2 rows
+      }
+    }
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  const pages = useMemo(() => chunkArray(tips, pageSize), [tips, pageSize]);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
@@ -71,7 +88,7 @@ export default function TipsCarousel({ tips = [] }) {
   };
 
   return (
-    <div className="relative w-full px-6 md:px-12">
+    <div className="relative w-full px-2 sm:px-4 md:px-12">
       {/* arrows */}
       <button type="button" {...prevBtnProps}>
         ‹
@@ -84,14 +101,14 @@ export default function TipsCarousel({ tips = [] }) {
       <div
         ref={emblaRef}
         dir={dir}
-        className="overflow-x-hidden overflow-y-visible py-8 select-none"
+        className="overflow-x-hidden overflow-y-visible py-4 sm:py-8 select-none"
       >
         {/* Track: use gap (direction-agnostic) instead of margin hacks */}
-        <div className="flex gap-3 pb-2">
+        <div className="flex gap-2 sm:gap-3 pb-2">
           {pages.map((page, pageIdx) => (
             <div key={pageIdx} className="flex-[0_0_100%] shrink-0">
-              {/* 3×2 grid page; exact row height + custom 10px gap */}
-              <div className="grid grid-cols-3 auto-rows-[179px] gap-x-[10px] gap-y-[10px]">
+              {/* Responsive grid: 1 col on mobile, 2 on sm/md, 3 on lg+ */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[160px] sm:auto-rows-[179px] gap-x-2 gap-y-2 sm:gap-x-[10px] sm:gap-y-[10px]">
                 {page.map((t, i) => (
                   <div key={i} className="flex items-stretch justify-center">
                     <TipCard {...t} />

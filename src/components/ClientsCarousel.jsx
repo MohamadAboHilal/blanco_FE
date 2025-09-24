@@ -16,12 +16,16 @@ export default function ClientsCarousel({ logos = [] }) {
     [logos]
   );
 
+  // Use a faster speed for small screens
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
   const autoplay = useRef(
     Autoplay({
-      delay: 1100,
-      stopOnInteraction: true,
-      stopOnMouseEnter: true,
-      stopOnFocusIn: true,
+      delay: isMobile ? 700 : 700, // Much faster on mobile
+      stopOnInteraction: true, // Fix: allow swipe/drag to pause autoplay
+      stopOnMouseEnter: false,
+      stopOnFocusIn: false,
+      playOnInit: true,
+      loop: true,
     })
   );
 
@@ -37,13 +41,19 @@ export default function ClientsCarousel({ logos = [] }) {
   );
 
   useEffect(() => {
-    emblaApi?.reInit({
-      loop: true,
-      align: "start",
-      dragFree: true,
-      containScroll: "trimSnaps",
-      direction: dir,
-    });
+    if (emblaApi) {
+      emblaApi.reInit({
+        loop: true,
+        align: "start",
+        dragFree: true,
+        containScroll: "trimSnaps",
+        direction: dir,
+      });
+      // Ensure autoplay is running and loop is enabled
+      if (autoplay.current) {
+        autoplay.current.play();
+      }
+    }
   }, [emblaApi, dir]);
 
   if (!items.length) {
@@ -55,19 +65,19 @@ export default function ClientsCarousel({ logos = [] }) {
   }
 
   return (
-    <div className="relative px-6 md:px-12">
+    <div className="relative px-2 sm:px-4 md:px-8 lg:px-12">
       <div className="overflow-hidden" ref={emblaRef} dir={dir}>
-        <div className="flex gap-6">
+        <div className="flex gap-4 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-12 flex-nowrap">
           {items.map(({ src, alt }, i) => (
             <div
               key={i}
-              className="flex-none flex items-center justify-center
-                         basis-1/2 sm:basis-1/3 md:basis-1/5 lg:basis-1/6"
+              className="flex-none flex items-center justify-center px-1"
+              style={{ minWidth: "80px", maxWidth: "160px" }}
             >
               <img
                 src={src}
                 alt={alt || `client-${i}`}
-                className="h-10 md:h-12 w-auto object-contain select-none"
+                className="h-8 sm:h-10 md:h-12 w-auto object-contain select-none"
                 draggable="false"
                 loading="lazy"
                 decoding="async"

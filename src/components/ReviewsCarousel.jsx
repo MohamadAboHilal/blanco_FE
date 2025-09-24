@@ -14,8 +14,22 @@ export default function ReviewsCarousel({ reviews = [] }) {
   const { dir } = useLocale(); // 'ltr' | 'rtl'
   const isRtl = dir === "rtl";
 
-  // 4 reviews per page -> 2 columns × 2 rows
-  const pages = chunkArray(reviews, 4);
+  // Responsive chunk size: 3 for small/medium, 4 for large screens
+  const [chunkSize, setChunkSize] = useState(4);
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 1024) {
+        setChunkSize(3); // 1 col × 3 rows
+      } else {
+        setChunkSize(4); // 2 col × 2 rows
+      }
+    }
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const pages = chunkArray(reviews, chunkSize);
 
   // Embla v8 with direction
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -73,7 +87,7 @@ export default function ReviewsCarousel({ reviews = [] }) {
   };
 
   return (
-    <div className="relative w-full px-6 md:px-12">
+    <div className="relative w-full px-2 sm:px-6 md:px-12">
       {/* arrows */}
       <button type="button" {...prevBtnProps}>
         ‹
@@ -89,14 +103,19 @@ export default function ReviewsCarousel({ reviews = [] }) {
         className="overflow-x-hidden overflow-y-visible py-8 select-none"
       >
         {/* Track: use gap (direction-agnostic) instead of margin hacks */}
-        <div className="flex gap-6 pb-2">
+        <div className="flex gap-6 lg:gap-12 pb-2">
           {pages.map((page, pageIdx) => (
             <div key={pageIdx} className="flex-[0_0_100%] shrink-0">
-              {/* 2x2 grid page; rows fixed to card height */}
-              <div className="grid grid-cols-2 gap-y-4 auto-rows-[198px]">
+              {/* Responsive grid: 1 col × 3 rows on small/medium, 2×2 on large */}
+              <div
+                className={
+                  chunkSize === 3
+                    ? "grid grid-cols-1 gap-y-4 auto-rows-[minmax(180px,220px)] gap-x-0"
+                    : "grid grid-cols-1 md:grid-cols-2 gap-y-4 auto-rows-[198px] gap-x-16"
+                }
+              >
                 {page.map((review, i) => (
                   <div key={i} className="flex items-stretch justify-center">
-                    {/* The card is 422×198 max, centered inside each grid cell */}
                     <ReviewCard {...review} />
                   </div>
                 ))}

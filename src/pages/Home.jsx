@@ -15,7 +15,6 @@ function Home() {
 
   const [contact, setContact] = useState(null);
 
-  // Fetch contact data once (ignore AbortError from StrictMode/unmount)
   useEffect(() => {
     const ctrl = new AbortController();
     let mounted = true;
@@ -40,7 +39,6 @@ function Home() {
     };
   }, []);
 
-  // Number + tel: href
   const callNumber = contact?.call_number || "(+963) 999 222 111";
   const telHref = useMemo(
     () => `tel:${callNumber.replace(/[^\d+]/g, "")}`,
@@ -54,26 +52,31 @@ function Home() {
         style={{ boxShadow: "0 0 20px rgba(0,0,0,0.15)" }}
         className="w-auto bg-[#EEF5FF] flex flex-col rounded-[10px] max-w-auto mx-auto transition-colors duration-300"
       >
-        <div className="flex flex-col lg:flex-row items-center lg:items-center justify-between gap-8 px-6 lg:px-20 mt-2">
-          {/* LEFT SIDE (text) */}
-          <div className="flex flex-col items-start max-w-xl w-full">
-            {/* Top line with star and big peach title */}
+        {/* Stack on small/medium; row on large */}
+        <div
+          className="
+            flex flex-col lg:flex-row
+            items-center lg:items-stretch           /* (2) stretch columns on lg */
+            justify-between gap-8 px-6 lg:px-20 mt-2
+            lg:min-h-[540px] xl:min-h-0            /* (1) give row height on lg */
+          "
+        >
+          {/* LEFT: text */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-xl w-full">
             <div className="flex items-center gap-3">
-              <h1 className="whitespace-nowrap text-[36px] md:text-[56px] lg:text-[64px] font-extrabold leading-tight text-[#FDC789]">
+              <h1 className="whitespace-normal lg:whitespace-nowrap text-[36px] md:text-[56px] lg:text-[64px] font-extrabold leading-tight text-[#FDC789] break-words">
                 {t("hero.title1")}
               </h1>
             </div>
 
-            {/* “Make It Sparkle” — last word in a pill (works for Arabic too) */}
             {(() => {
               const title = t("hero.title2") || "";
               const parts = title.trim().split(/\s+/);
               const last = parts.pop() || "";
               const before = parts.join(" ");
-
               return (
                 <h2
-                  className="mt-4 text-[34px] md:text-[44px] font-extrabold leading-tight text-[#00B0DF] whitespace-nowrap"
+                  className="mt-4 text-[34px] md:text-[44px] font-extrabold leading-tight text-[#00B0DF] whitespace-normal lg:whitespace-nowrap break-words"
                   dir="auto"
                 >
                   {before && <span className="align-middle">{before}</span>}
@@ -85,13 +88,12 @@ function Home() {
               );
             })()}
 
-            {/* Sub text with the highlighted phrase in brand blue */}
             {(() => {
               const sub = t("hero.sub");
               const hl = t("hero.highlight");
               const parts = sub.split(hl);
               return (
-                <p className="mt-6 text-slate-500 text-lg md:text-xl font-normal leading-8">
+                <p className="mt-6 text-slate-500 text-lg md:text-xl font-normal leading-8 break-words">
                   {parts[0]}
                   <span className="text-[#00B0DF] font-semibold">{hl}</span>
                   {parts[1] ?? ""}
@@ -99,8 +101,7 @@ function Home() {
               );
             })()}
 
-            {/* Guarantee row */}
-            <div className="mt-8 flex items-center gap-3">
+            <div className="mt-8 flex items-center justify-center lg:justify-start gap-3">
               <svg
                 viewBox="0 0 24 24"
                 className="h-6 w-6 text-emerald-500"
@@ -121,25 +122,42 @@ function Home() {
               </span>
             </div>
 
-            {/* Call button */}
             <a
               href={telHref}
               aria-label={`Call ${callNumber}`}
-              className="mt-10 inline-flex items-center rounded-2xl gap-1
-               bg-[#DFF4FF] text-[#00B0DF] px-6 py-4 text-xl font-bold"
+              className="mt-10 inline-flex items-center rounded-2xl gap-1 bg-[#DFF4FF] text-[#00B0DF] px-6 py-4 text-xl font-bold"
             >
               {t("hero.call")}
               <LtrNum>&nbsp;{callNumber}</LtrNum>
             </a>
           </div>
 
-          {/* RIGHT SIDE (image) */}
-          <div className="flex-1 flex justify-end items-center">
-            <img
-              src={figures}
-              alt="Figures"
-              className="max-h-[80vh] object-contain ml-0 lg:ml-20"
-            />
+          {/* RIGHT: image (snap to bottom on lg) */}
+          <div
+            className="
+              flex-1 w-full flex
+              justify-center lg:justify-end
+              items-center lg:items-stretch        /* stretch this column */
+              mt-6 lg:mt-0
+              lg:pr-8 xl:pr-12
+            "
+          >
+            {/* (3) inner wrapper fills height, uses column + mt-auto on img */}
+            <div className="w-full lg:w-auto flex lg:flex-col lg:h-full">
+              <img
+                src={figures}
+                alt="Figures"
+                className="
+                  w-full h-auto
+                  max-w-[520px] md:max-w-[640px]
+                  lg:max-w-[560px] xl:max-w-[600px] 2xl:max-w-[640px]
+                  max-h-[48vh] md:max-h-[64vh] lg:max-h-[70vh]
+                  object-contain
+                  mx-auto lg:mx-0
+                  lg:mt-auto                           /* push image to bottom on lg */
+                "
+              />
+            </div>
           </div>
         </div>
       </div>

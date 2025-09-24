@@ -124,13 +124,13 @@ export default function ContactSection() {
               className="w-full"
               dir={isRTL ? "rtl" : "ltr"}
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input
                   type="text"
                   name="name"
                   placeholder={t("contact.name")}
                   required
-                  className="input w-full max-w-xs rounded-2xl h-14 bg-white border border-slate-200 px-4"
+                  className="input w-full rounded-2xl h-14 bg-white border border-slate-200 px-4"
                   style={{ boxShadow: "0 0 10px rgba(0,0,0,0.08)" }}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -140,19 +140,19 @@ export default function ContactSection() {
                   name="email"
                   placeholder={t("contact.email")}
                   required
-                  className="input w-full max-w-xs rounded-2xl h-14 bg-white border border-slate-200 px-4"
+                  className="input w-full rounded-2xl h-14 bg-white border border-slate-200 px-4"
                   style={{ boxShadow: "0 0 10px rgba(0,0,0,0.08)" }}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
 
                 {/* PHONE — prefix dropdown + local number (RTL-aware) */}
-                <div className="col-span-1 sm:col-span-2">
+                <div className="md:col-span-2 col-span-1">
                   <label className="w-full">
                     <div
                       dir={isRTL ? "rtl" : "ltr"}
-                      className={`flex items-center h-14 rounded-2xl bg-white border border-slate-200 px-3 gap-3
-                  ${isRTL ? "flex-row-reverse" : "flex-row"}`}
+                      className={`flex items-center h-14 rounded-2xl bg-white border border-slate-200 px-3 gap-3 w-full
+                          ${isRTL ? "flex-row-reverse" : "flex-row"}`}
                       style={{ boxShadow: "0 0 10px rgba(0,0,0,0.08)" }}
                     >
                       {/* Prefix dropdown (your reusable component) */}
@@ -160,7 +160,7 @@ export default function ContactSection() {
                         value={dial}
                         onChange={handleDialChange}
                         options={COUNTRY_OPTIONS}
-                        rtl={isRTL} // make its menu open on the right in RTL (add dropdown-end internally)
+                        rtl={isRTL}
                       />
 
                       {/* Local number input */}
@@ -169,10 +169,9 @@ export default function ContactSection() {
                         name="phone"
                         placeholder={t("contact.phone") || "Phone number"}
                         required
-                        // text aligns and caret starts on the right in RTL
-                        className={`grow bg-transparent outline-none h-full px-2 text-slate-900
-                    ${isRTL ? "text-right" : "text-left"}`}
-                        dir={isRTL ? "rtl" : "ltr"} // hard-force direction for the input itself
+                        className={`grow bg-transparent outline-none h-full px-2 text-slate-900 w-full
+                            ${isRTL ? "text-right" : "text-left"}`}
+                        dir={isRTL ? "rtl" : "ltr"}
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         inputMode="tel"

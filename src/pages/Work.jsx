@@ -1,5 +1,5 @@
 // Work.jsx
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import WorkCard from "../components/WorkCard";
 import VideoCard from "../components/VideoCard";
@@ -61,34 +61,36 @@ export default function Work() {
 
   const columns = useMemo(() => toColumns(filtered), [filtered]);
 
-  // ONE Embla for everything (centered)
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
+  const [emblaRef] = useEmblaCarousel({
+    loop: false,
     dragFree: true,
     align: "center",
     containScroll: "trimSnaps",
     direction: dir,
   });
 
+  // 🔽 make pill paddings responsive (smaller on mobile)
   const pillBase =
-    "px-8 py-2 rounded-lg font-medium transition focus:outline-none focus:ring-2 focus:ring-sky-500";
+    "px-5 sm:px-6 md:px-8 py-2 rounded-lg font-medium transition focus:outline-none focus:ring-2 focus:ring-sky-500";
   const activeClass = "bg-sky-500 text-white shadow";
   const inactiveClass = "text-gray-600";
 
   return (
-    <div className="w-full min-h-[65vh] flex flex-col items-center justify-center space-y-10">
+    <div className="w-full min-h-[65vh] flex flex-col items-center justify-center space-y-8 md:space-y-10">
       {/* Heading + Subtitle + Tabs */}
-      <div className="flex flex-col items-center space-y-6">
-        <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
+      <div className="flex flex-col items-center space-y-4 md:space-y-6">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 text-center">
           <span className="inline-block text-yellow-400 mr-2">✨</span>
           {t("work.our")} <span className="text-sky-500">{t("work.work")}</span>{" "}
           {t("work.gallery")}
         </h2>
-        <p className="text-gray-600 font-semibold text-xl">
+
+        {/* 🔽 smaller text + nicer line-height on mobile */}
+        <p className="text-base sm:text-lg md:text-xl leading-snug text-gray-600 font-semibold text-center px-4">
           {t("work.description")}
         </p>
 
-        <div className="inline-flex rounded-xl bg-gray-100 p-1 shadow-sm gap-4">
+        <div className="inline-flex rounded-xl bg-gray-100 p-1 shadow-sm gap-3 sm:gap-4">
           <button
             className={`${pillBase} ${
               filter === "beforeAfter" ? activeClass : inactiveClass
@@ -109,7 +111,7 @@ export default function Work() {
       </div>
 
       {/* Content */}
-      <div className="w-full flex flex-col items-center space-y-10">
+      <div className="w-full flex flex-col items-center space-y-8 md:space-y-10">
         {loading ? (
           <div className="w-full max-w-7xl grid place-items-center text-slate-400 h-[50vh]">
             {t("common.loading") || "Loading…"}
@@ -119,23 +121,23 @@ export default function Work() {
             {t("common.failed") || "Failed to load gallery."}
           </div>
         ) : filtered.length ? (
-          <div className="w-full max-w-7xl select-none">
+          // 🔽 make the gap responsive here (smaller on mobile)
+          <div className="w-full max-w-7xl select-none [--work-gap:1rem] sm:[--work-gap:1.25rem] md:[--work-gap:0.75rem] lg:[--work-gap:0.75rem] xl:[--work-gap:0.75rem]">
             {/* Embla viewport */}
-            <div className="overflow-hidden" ref={emblaRef} dir={dir}>
+            <div
+              className="overflow-hidden px-3 sm:px-4"
+              ref={emblaRef}
+              dir={dir}
+            >
               {/* Track: each slide is a vertical column of two cards */}
-              <div
-                className="flex gap-[var(--work-gap)] justify-center"
-                style={{ "--work-gap": "2.5rem" }}
-              >
+              <div className="flex gap-[var(--work-gap)] justify-start">
                 {columns.map((col, idx) => (
                   <div
                     key={idx}
-                    className="flex-none w-[320px] sm:w-[360px] md:w-[380px]"
+                    // 🔽 1 column per view on small/medium, multi on large
+                    className="flex-none w-full max-w-xs md:w-[380px] md:max-w-none md:basis-auto"
                   >
-                    <div
-                      className="flex flex-col gap-[var(--work-gap)]"
-                      style={{ "--work-gap": "2.5rem" }}
-                    >
+                    <div className="flex flex-col gap-[var(--work-gap)]">
                       <SlideCard g={col[0]} />
                       <SlideCard g={col[1]} />
                     </div>

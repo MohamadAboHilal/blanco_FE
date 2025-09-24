@@ -90,28 +90,25 @@ export default function Footer() {
   };
 
   return (
-    <footer className="w-auto bg-[#F4F6FB] pt-12">
-      <div className="max-w-full mx-auto px-6 lg:px-10">
-        {/* Remove rounded box, use plain panel */}
-        <div className="px-0 md:px-0 py-10">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-0 items-center justify-items-center">
+    <footer className="w-full bg-[#F4F6FB] pt-8 pb-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <div className="py-8">
+          <div className="flex flex-col md:grid md:grid-cols-4 gap-8 lg:gap-16 md:gap-0 items-stretch justify-items-center">
             {/* LEFT — Brand + tagline + socials */}
-            <div className="flex flex-col gap-2 items-center justify-start w-full">
+            <div className="flex flex-col gap-2 items-center justify-start w-full mb-8 md:mb-0">
               <img
                 src={logo}
                 alt="Blanco Logo"
                 className="h-8 w-auto mb-1"
                 style={{ objectFit: "contain" }}
               />
-
               <div className="text-center w-full">
                 <p className="text-[#00B0DF] font-semibold tracking-wide">
                   {t("footer.make")}
                 </p>
                 <p className="text-slate-500 text-sm">{t("footer.cleaning")}</p>
               </div>
-
-              <div className="flex gap-4 mt-1 justify-center w-full">
+              <div className="flex gap-3 sm:gap-4 mt-2 justify-center w-full flex-wrap">
                 {socials.map((s, i) => (
                   <a
                     key={i}
@@ -119,20 +116,24 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="w-12 h-12 flex items-center justify-center rounded-full bg-[#F2F8FF] ring-1 ring-cyan-100/60 hover:scale-110 transition"
+                    className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-[#F2F8FF] ring-1 ring-cyan-100/60 hover:scale-110 transition"
                   >
-                    <img src={s.icon} alt={s.label} className="w-12 h-12" />
+                    <img
+                      src={s.icon}
+                      alt={s.label}
+                      className="w-6 h-6 sm:w-12 sm:h-12"
+                    />
                   </a>
                 ))}
               </div>
             </div>
 
             {/* MIDDLE LEFT — Useful Links */}
-            <div className="flex flex-col items-center justify-center w-full">
-              <h4 className="text-[#00B0DF] font-semibold text-xl mb-4 text-center w-full">
+            <div className="flex flex-col items-center justify-center w-full mb-8 md:mb-0">
+              <h4 className="text-[#00B0DF] font-semibold text-lg sm:text-xl mb-4 text-center w-full">
                 {t("footer.useful")}
               </h4>
-              <ul className="space-y-3 text-slate-900 font-semibold text-center w-full">
+              <ul className="space-y-2 sm:space-y-3 text-slate-900 font-semibold text-center w-full">
                 <li>
                   <button
                     type="button"
@@ -160,11 +161,11 @@ export default function Footer() {
             </div>
 
             {/* MIDDLE RIGHT — You Can Find Us */}
-            <div className="flex flex-col items-center justify-center w-full">
-              <h4 className="text-[#00B0DF] font-semibold text-xl mb-4 text-center w-full">
+            <div className="flex flex-col items-center justify-center w-full mb-8 md:mb-0">
+              <h4 className="text-[#00B0DF] font-semibold text-lg sm:text-xl mb-4 text-center w-full">
                 {t("footer.find")}
               </h4>
-              <ul className="space-y-3 text-slate-900 font-medium text-center w-full">
+              <ul className="space-y-2 sm:space-y-3 text-slate-900 font-medium text-center w-full">
                 <li className="flex items-center gap-2 justify-center w-full">
                   <img src={phoneIcon} alt="phone" className="w-5 h-5" />
                   <a href={telHref} className="hover:underline">
@@ -189,7 +190,6 @@ export default function Footer() {
                   </a>
                 </li>
               </ul>
-
               {loading && (
                 <div className="mt-3 text-xs text-slate-400 text-center w-full">
                   {t("common.loading") || "Loading…"}
@@ -198,15 +198,14 @@ export default function Footer() {
             </div>
 
             {/* RIGHT — Decorative B logo and center all content */}
-            <div className="hidden md:flex flex-col items-center justify-center h-full text-center w-full">
+            <div className="flex flex-col items-center justify-center h-full text-center w-full">
               <div className="flex flex-col items-center justify-center h-full w-full">
                 <img
                   src={Blogo}
                   alt=""
-                  className="w-[110px] h-auto select-none pointer-events-none"
+                  className="w-[80px] sm:w-[110px] h-auto select-none pointer-events-none"
                   style={{ opacity: 0.3 }}
                 />
-                {/* Add any additional content here if needed, all centered */}
               </div>
             </div>
           </div>

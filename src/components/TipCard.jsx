@@ -4,10 +4,10 @@ export default function TipCard({ icon, title, highlight, text }) {
   return (
     <div
       className="
-        w-[404px] h-[179px] rounded-[15px]
+        w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg
+        h-[160px] sm:h-[179px] rounded-[15px]
         bg-white border border-slate-200/70
-
-        p-[13px] flex
+        p-3 flex
       "
     >
       <div className="flex items-start gap-4">

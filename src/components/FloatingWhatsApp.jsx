@@ -39,6 +39,7 @@ export default function FloatingWhatsApp() {
 
   return (
     <div
+      className="hidden md:block"
       style={{
         position: "sticky",
         bottom: "24px",

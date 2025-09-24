@@ -45,19 +45,27 @@ export default function PhonePrefixDropdown({
 
       {/* Menu */}
       <ul
-        tabIndex={0}
-        className={`dropdown-content menu p-2 shadow bg-base-100 rounded-box w-56 z-50 ${
-          rtl ? "text-right" : "text-left"
-        }`}
+        className={`dropdown-content menu p-2 shadow rounded-box w-56 z-50 bg-white
+    [&_li>*]:!bg-transparent
+    [&_li>*]:hover:!bg-transparent
+    [&_li>*]:focus:!bg-transparent
+    [&_li>*]:active:!bg-transparent
+    [&_li>*]:focus-visible:!bg-transparent
+    [&_li>*]:text-inherit
+    [&_li>*]:hover:text-inherit
+    [&_li>*]:focus:text-inherit
+    [&_li>*]:active:text-inherit
+    [&_li>*]:focus-visible:text-inherit
+    [&_li>*]:outline-none [&_li>*]:ring-0
+    ${rtl ? "text-right" : "text-left"}`}
       >
         {options.map((opt) => (
           <li key={opt.dial}>
             <button
               type="button"
+              onMouseDown={(e) => e.preventDefault()} // don't focus on click
               onClick={() => onChange(opt.dial)}
-              className={`flex items-center ${
-                rtl ? "justify-between" : "justify-between"
-              }`}
+              className="flex items-center justify-between focus:outline-none focus:ring-0"
             >
               <span className="flex items-center gap-2">
                 <ReactCountryFlag
