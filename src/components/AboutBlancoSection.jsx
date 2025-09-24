@@ -36,7 +36,7 @@ export default function AboutBlancoSection() {
   ];
 
   return (
-    <section className="mt-8">
+    <section>
       <div
         className="relative rounded-3xl bg-[#FBF4ED] px-6 py-10 md:px-10 md:py-12"
         style={{
