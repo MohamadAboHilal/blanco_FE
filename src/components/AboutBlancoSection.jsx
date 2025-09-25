@@ -48,9 +48,9 @@ export default function AboutBlancoSection() {
       >
         <div className="mx-auto max-w-7xl">
           {/* Heading */}
-          <div className="mb-20 text-left md:text-center">
+          <div className="mb-20 text-center md:text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-[#0B2B36]">
-              ✨ {t("aboutBlanco.about")}{" "}
+              ✨{t("aboutBlanco.about")}{" "}
               <span className="text-[#00B0DF]">{t("aboutBlanco.blanco")}</span>
             </h2>
           </div>

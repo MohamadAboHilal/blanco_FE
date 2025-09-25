@@ -52,23 +52,18 @@ function Home() {
         style={{ boxShadow: "0 0 20px rgba(0,0,0,0.15)" }}
         className="w-auto bg-[#EEF5FF] flex flex-col rounded-[10px] max-w-auto mx-auto transition-colors duration-300"
       >
-        {/* Stack on small/medium; row on large */}
-        <div
-          className="
-            flex flex-col lg:flex-row
-            items-center lg:items-stretch           /* (2) stretch columns on lg */
-            justify-between gap-8 px-6 lg:px-20 mt-2
-            lg:min-h-[540px] xl:min-h-0            /* (1) give row height on lg */
-          "
-        >
-          {/* LEFT: text */}
-          <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-xl w-full">
+        {/* Container with proper responsive layout */}
+        <div className="flex flex-col 2xl:flex-row items-center 2xl:items-stretch justify-between gap-8 px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 pt-8 2xl:py-0 2xl:mt-2 2xl:min-h-[380px]">
+          {/* LEFT: Text Content */}
+          <div className="flex flex-col items-center 2xl:items-start text-center 2xl:text-left w-full 2xl:max-w-xl order-1 2xl:order-1">
+            {/* Main Title */}
             <div className="flex items-center gap-3">
-              <h1 className="whitespace-normal lg:whitespace-nowrap text-[36px] md:text-[56px] lg:text-[64px] font-extrabold leading-tight text-[#FDC789] break-words">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-[64px] font-extrabold leading-tight text-[#FDC789] break-words whitespace-nowrap">
                 {t("hero.title1")}
               </h1>
             </div>
 
+            {/* Secondary Title with Highlighted Word */}
             {(() => {
               const title = t("hero.title2") || "";
               const parts = title.trim().split(/\s+/);
@@ -76,7 +71,7 @@ function Home() {
               const before = parts.join(" ");
               return (
                 <h2
-                  className="mt-4 text-[34px] md:text-[44px] font-extrabold leading-tight text-[#00B0DF] whitespace-normal lg:whitespace-nowrap break-words"
+                  className="mt-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl 2xl:text-[44px] font-extrabold leading-tight text-[#00B0DF] whitespace-nowrap"
                   dir="auto"
                 >
                   {before && <span className="align-middle">{before}</span>}
@@ -88,12 +83,19 @@ function Home() {
               );
             })()}
 
+            {/* Subtitle with Highlighted Text */}
             {(() => {
               const sub = t("hero.sub");
               const hl = t("hero.highlight");
               const parts = sub.split(hl);
               return (
-                <p className="mt-6 text-slate-500 text-lg md:text-xl font-normal leading-8 break-words">
+                <p
+                  className={
+                    `mt-6 text-slate-500 text-base sm:text-lg md:text-xl font-normal leading-relaxed whitespace-normal break-words text-center ` +
+                    (dir === "rtl" ? "lg:text-right" : "lg:text-left")
+                  }
+                  dir={dir}
+                >
                   {parts[0]}
                   <span className="text-[#00B0DF] font-semibold">{hl}</span>
                   {parts[1] ?? ""}
@@ -101,10 +103,11 @@ function Home() {
               );
             })()}
 
-            <div className="mt-8 flex items-center justify-center lg:justify-start gap-3">
+            {/* Guarantee Section */}
+            <div className="mt-8 flex items-center justify-center 2xl:justify-start gap-3">
               <svg
                 viewBox="0 0 24 24"
-                className="h-6 w-6 text-emerald-500"
+                className="h-6 w-6 text-emerald-500 flex-shrink-0"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
@@ -117,47 +120,46 @@ function Home() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span className="text-xl font-normal text-slate-900">
+              <span className="text-lg sm:text-xl font-normal text-slate-900">
                 {t("hero.guarantee")}
               </span>
             </div>
 
+            {/* Call Button */}
             <a
               href={telHref}
               aria-label={`Call ${callNumber}`}
-              className="mt-10 inline-flex items-center rounded-2xl gap-1 bg-[#DFF4FF] text-[#00B0DF] px-6 py-4 text-xl font-bold"
+              className="mt-10 inline-flex items-center rounded-2xl gap-1 bg-[#DFF4FF] text-[#00B0DF] px-6 py-4 text-lg sm:text-xl font-bold hover:bg-[#CCE8FF] transition-colors duration-200"
             >
               {t("hero.call")}
               <LtrNum>&nbsp;{callNumber}</LtrNum>
             </a>
           </div>
 
-          {/* RIGHT: image (snap to bottom on lg) */}
-          <div
-            className="
-              flex-1 w-full flex
-              justify-center lg:justify-end
-              items-center lg:items-stretch        /* stretch this column */
-              mt-6 lg:mt-0
-              lg:pr-8 xl:pr-12
-            "
-          >
-            {/* (3) inner wrapper fills height, uses column + mt-auto on img */}
-            <div className="w-full lg:w-auto flex lg:flex-col lg:h-full">
-              <img
-                src={figures}
-                alt="Figures"
-                className="
-                  w-full h-auto
-                  max-w-[520px] md:max-w-[640px]
-                  lg:max-w-[560px] xl:max-w-[600px] 2xl:max-w-[640px]
-                  max-h-[48vh] md:max-h-[64vh] lg:max-h-[70vh]
-                  object-contain
-                  mx-auto lg:mx-0
-                  lg:mt-auto                           /* push image to bottom on lg */
-                "
-              />
-            </div>
+          {/* RIGHT: Image */}
+          <div className="w-full 2xl:w-auto flex justify-center items-end 2xl:justify-end 2xl:flex-col 2xl:h-full order-2 2xl:order-2">
+            <img
+              src={figures}
+              alt="Figures"
+              className="
+                w-full h-auto object-contain
+                max-w-[280px] 
+                sm:max-w-[350px] 
+                md:max-w-[450px] 
+                lg:max-w-[500px] 
+                xl:max-w-[550px] 
+                2xl:max-w-[560px] 
+                3xl:max-w-[640px]
+                max-h-[300px]
+                sm:max-h-[350px]
+                md:max-h-[400px]
+                lg:max-h-[450px]
+                xl:max-h-[500px]
+                2xl:max-h-[70vh]
+                mx-auto 2xl:mx-0
+                pt-4 2xl:pt-0
+              "
+            />
           </div>
         </div>
       </div>

@@ -90,10 +90,18 @@ export default function TipsCarousel({ tips = [] }) {
   return (
     <div className="relative w-full px-2 sm:px-4 md:px-12">
       {/* arrows */}
-      <button type="button" {...prevBtnProps}>
+      <button
+        type="button"
+        {...prevBtnProps}
+        className={prevBtnProps.className + " hidden lg:block"}
+      >
         ‹
       </button>
-      <button type="button" {...nextBtnProps}>
+      <button
+        type="button"
+        {...nextBtnProps}
+        className={nextBtnProps.className + " hidden lg:block"}
+      >
         ›
       </button>
 

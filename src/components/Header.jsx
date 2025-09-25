@@ -197,7 +197,12 @@ function Header() {
               }, 100);
             }}
           >
-            <img src={logo} alt="Logo" className="h-8 w-auto" />
+            <img
+              src={logo}
+              alt="Logo"
+              className="h-12 w-auto object-contain max-w-[180px] aspect-[3/1]"
+              style={{ minWidth: "60px" }}
+            />
           </Link>
         </div>
 
@@ -246,10 +251,9 @@ function Header() {
 
             {/* Language dropdown kept OUTSIDE the hamburger */}
             <ul
-              className="
+              className={`${navTap}
                 menu menu-horizontal px-0 items-center
-                [&_li>*:active]:!bg-transparent
-              "
+                `}
             >
               <LanguageDropdown />
             </ul>

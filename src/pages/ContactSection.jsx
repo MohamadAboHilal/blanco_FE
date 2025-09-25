@@ -130,20 +130,26 @@ export default function ContactSection() {
                   name="name"
                   placeholder={t("contact.name")}
                   required
-                  className="input w-full rounded-2xl h-14 bg-white border border-slate-200 px-4"
+                  className={`input w-full rounded-2xl h-14 bg-white border border-slate-200 px-4 ${
+                    isRTL ? "text-right" : "text-left"
+                  }`}
                   style={{ boxShadow: "0 0 10px rgba(0,0,0,0.08)" }}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  dir={isRTL ? "rtl" : "ltr"}
                 />
                 <input
                   type="email"
                   name="email"
                   placeholder={t("contact.email")}
                   required
-                  className="input w-full rounded-2xl h-14 bg-white border border-slate-200 px-4"
+                  className={`input w-full rounded-2xl h-14 bg-white border border-slate-200 px-4 ${
+                    isRTL ? "text-right" : "text-left"
+                  }`}
                   style={{ boxShadow: "0 0 10px rgba(0,0,0,0.08)" }}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  dir={isRTL ? "rtl" : "ltr"}
                 />
 
                 {/* PHONE — prefix dropdown + local number (RTL-aware) */}
@@ -185,12 +191,29 @@ export default function ContactSection() {
                 name="message"
                 placeholder={t("contact.message")}
                 required
-                className="textarea bg-white rounded-xl w-full mt-4 h-48 resize-none border border-slate-200"
+                className={`textarea bg-white rounded-xl w-full mt-4 h-48 resize-none border border-slate-200 ${
+                  isRTL ? "text-right" : "text-left"
+                }`}
                 style={{ boxShadow: "0 0 10px rgba(0,0,0,0.08)" }}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
+                dir={isRTL ? "rtl" : "ltr"}
               />
 
+              {/* Alerts above the button for layout stability */}
+              {(status === "sent" || status === "error") && (
+                <div
+                  className={`alert mt-4 rounded-2xl ${
+                    status === "sent" ? "alert-success" : "alert-error"
+                  }`}
+                >
+                  <span>
+                    {status === "sent"
+                      ? t("contact.alert") || "Message sent successfully!"
+                      : errorMsg}
+                  </span>
+                </div>
+              )}
               <div className="flex justify-end">
                 <button
                   type="submit"
@@ -202,19 +225,6 @@ export default function ContactSection() {
                     : t("contact.send")}
                 </button>
               </div>
-
-              {status === "sent" && (
-                <div className="alert alert-success mt-4 rounded-2xl">
-                  <span>
-                    {t("contact.alert") || "Message sent successfully!"}
-                  </span>
-                </div>
-              )}
-              {status === "error" && (
-                <div className="alert alert-error mt-4 rounded-2xl">
-                  <span>{errorMsg}</span>
-                </div>
-              )}
             </form>
           </div>
         </div>

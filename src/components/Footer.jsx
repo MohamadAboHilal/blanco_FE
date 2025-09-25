@@ -108,7 +108,7 @@ export default function Footer() {
                 </p>
                 <p className="text-slate-500 text-sm">{t("footer.cleaning")}</p>
               </div>
-              <div className="flex gap-3 sm:gap-4 mt-2 justify-center w-full flex-wrap">
+              <div className="flex gap-3 sm:gap-4 mt-2 justify-center w-full flex-nowrap">
                 {socials.map((s, i) => (
                   <a
                     key={i}
@@ -116,13 +116,9 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-[#F2F8FF] ring-1 ring-cyan-100/60 hover:scale-110 transition"
+                    className="w-10 h-10 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-[#F2F8FF] ring-1 ring-cyan-100/60 hover:scale-110 transition"
                   >
-                    <img
-                      src={s.icon}
-                      alt={s.label}
-                      className="w-6 h-6 sm:w-12 sm:h-12"
-                    />
+                    <img src={s.icon} alt={s.label} className="w-10 h-10" />
                   </a>
                 ))}
               </div>
