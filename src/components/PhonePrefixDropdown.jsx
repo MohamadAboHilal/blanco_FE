@@ -27,7 +27,6 @@ export default function PhonePrefixDropdown({
   rtl = false,
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [focusedIndex, setFocusedIndex] = useState(-1);
   const [isMobile, setIsMobile] = useState(false);
 
   const current = options.find((o) => o.dial === value) || options[0];
@@ -77,16 +76,13 @@ export default function PhonePrefixDropdown({
       case " ":
         e.preventDefault();
         setIsOpen((v) => !v);
-        setFocusedIndex(0);
         break;
       case "ArrowDown":
         e.preventDefault();
         setIsOpen(true);
-        setFocusedIndex(0);
         break;
       case "Escape":
         setIsOpen(false);
-        setFocusedIndex(-1);
         break;
       default:
         break;
@@ -96,7 +92,6 @@ export default function PhonePrefixDropdown({
   const handleSelect = (dial) => {
     onChange(dial);
     setIsOpen(false);
-    setFocusedIndex(-1);
   };
 
   const MenuList = (
@@ -107,17 +102,12 @@ export default function PhonePrefixDropdown({
       dir={rtl ? "rtl" : "ltr"}
     >
       {options.map((opt, index) => {
-        const active = index === focusedIndex || opt.dial === value;
         return (
           <li key={opt.dial} role="option" aria-selected={opt.dial === value}>
             <button
               type="button"
               onClick={() => handleSelect(opt.dial)}
-              onMouseEnter={() => setFocusedIndex(index)}
-              onFocus={() => setFocusedIndex(index)}
-              className={`w-full flex items-center justify-between p-3 rounded text-left ${
-                active ? "bg-slate-50" : "hover:bg-slate-50"
-              }`}
+              className="w-full flex items-center justify-between p-3 rounded text-left hover:bg-slate-50"
               aria-label={`Select ${opt.label}, ${opt.dial}`}
             >
               <span className="flex items-center gap-2">
@@ -152,7 +142,6 @@ export default function PhonePrefixDropdown({
         {...getReferenceProps({
           onClick: () => {
             setIsOpen((v) => !v);
-            setFocusedIndex(0);
           },
           onKeyDown: onTriggerKeyDown,
           "aria-haspopup": "listbox",
@@ -230,7 +219,6 @@ export default function PhonePrefixDropdown({
             className="absolute inset-0 bg-black/30"
             onClick={() => {
               setIsOpen(false);
-              setFocusedIndex(-1);
             }}
           />
           {/* Sheet */}
