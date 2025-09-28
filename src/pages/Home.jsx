@@ -59,9 +59,9 @@ function Home() {
             {/* Main Title – scales 2xl -> xl -> lg */}
             <div className="flex items-center gap-3">
               <h1
-                className="font-extrabold leading-tight text-[#FDC789] text-nowrap
+                className="font-extrabold leading-tight text-[#FDC789] 
                 text-3xl sm:text-4xl md:text-5xl
-                lg:text-4xl
+                lg:text-4xl lg:text-nowrap
                 xl:text-5xl
                 2xl:text-[64px]"
               >
