@@ -34,7 +34,7 @@ export default function TipsCarousel({ tips = [] }) {
   const pages = useMemo(() => chunkArray(tips, pageSize), [tips, pageSize]);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false,
+    loop: true,
     align: "start",
     direction: dir, // Embla v8 direction
   });

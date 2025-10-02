@@ -86,7 +86,7 @@ function Home() {
                 >
                   {before && <span className="align-middle">{before}</span>}
                   {before && " "}
-                  <span className="inline-block align-middle rounded-xl bg-[#00B0DF] text-white px-3 py-1">
+                  <span className="inline-block align-middle rounded-xl bg-[#00B0DF] text-white px-3 py-3">
                     {last}
                   </span>
                 </h2>

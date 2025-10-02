@@ -28,6 +28,8 @@ export default function FaqSection() {
     if (faqs.length) setOpenIndex(0);
   }, [faqs.length]);
 
+  const lang = localStorage.getItem("lang");
+
   return (
     <section
       id="faq"
@@ -47,13 +49,25 @@ export default function FaqSection() {
           <div className="space-y-5 pt-4 flex justify-center lg:justify-start">
             <div className="flex items-start gap-3 w-full">
               <div className="w-full">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight text-slate-900 text-center lg:text-left flex flex-col lg:flex-col ">
+                <h2
+                  className={`text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight text-slate-900 text-center ${
+                    lang === "ar" ? "lg:text-right" : "lg:text-left"
+                  } flex flex-col lg:flex-col `}
+                >
                   <span className="block">✨{t("faq.frequentlyAsked")}</span>
-                  <span className="text-[#00B0DF] block pl-0 mt-2 lg:pl-12">
+                  <span
+                    className={`text-[#00B0DF] block pl-0 mt-2  ${
+                      lang === "ar" ? "lg:pr-12" : "lg:pl-12"
+                    }`}
+                  >
                     {t("faq.questions")}
                   </span>
                 </h2>
-                <p className="mt-3 text-[#061B2D] text-lg sm:text-xl md:text-lg font-bold text-center lg:text-left">
+                <p
+                  className={`mt-3 text-[#061B2D] text-lg sm:text-xl md:text-lg font-bold text-center ${
+                    lang === "ar" ? "lg:text-right" : "lg:text-left"
+                  }`}
+                >
                   {t("faq.p1")} <br /> {t("faq.p2")}
                 </p>
               </div>
