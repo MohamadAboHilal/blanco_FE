@@ -8,18 +8,19 @@ export default function TipCard({ icon, title, highlight, text }) {
         h-[160px] sm:h-[179px] rounded-[15px]
         bg-white border border-slate-200/70
         p-3 flex
+        overflow-hidden
       "
     >
-      <div className="flex items-start gap-4">
+      <div className="flex items-start gap-4 w-full">
         <div className="shrink-0 w-10 h-10 rounded-xl bg-cyan-50 flex items-center justify-center">
           <img src={icon} alt="" className="w-6 h-6 object-contain" />
         </div>
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 h-full flex flex-col">
           <h4 className="font-bold text-slate-900 text-lg leading-snug">
             {title}{" "}
             {highlight && <span className="text-[#00B0DF]">{highlight}</span>}
           </h4>
-          <p className="mt-2 text-slate-500 leading-relaxed text-[15px]">
+          <p className="mt-2 text-slate-500 leading-relaxed text-[15px] break-words overflow-auto max-h-[90px] sm:max-h-[110px]">
             {text}
           </p>
         </div>
